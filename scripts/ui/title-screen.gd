@@ -5,16 +5,17 @@ func _on_play_button_pressed() -> void:
 
 func _on_quit_button_pressed() -> void:
 	if OS.get_name() == "HTML5":
-		JavaScriptBridge.eval("window.close();")
+		if JavaScriptBridge:
+			JavaScriptBridge.eval("if (typeof closeTab === 'function') closeTab();")
+		else:
+			OS.shell_open("about:blank")
 	else:
 		get_tree().quit()
 
 func _on_fullscreen_button_pressed() -> void:
 	if OS.get_name() == "HTML5":
-		if JavaScriptBridge.eval("document.fullscreenElement != null", true):
-			JavaScriptBridge.eval("document.exitFullscreen();")
-		else:
-			JavaScriptBridge.eval("document.getElementById('canvas').requestFullscreen();")
+		if JavaScriptBridge:
+			JavaScriptBridge.eval("if (typeof toggleFullscreen === 'function') toggleFullscreen();")
 	else:
 		if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MAXIMIZED)
