@@ -1,0 +1,19 @@
+[gd_scene load_steps=6 format=3 uid="uid://3ksm7d0pb7w7"]
+
+[ext_resource type="PackedScene" uid="uid://cups3qilu4oak" path="res://scenes/levels/tile_map_layer.tscn" id="1_kdopy"]
+[ext_resource type="PackedScene" uid="uid://ckg76mq128fgd" path="res://scenes/entities/player.tscn" id="2_owfie"]
+[ext_resource type="PackedScene" uid="uid://dwlfcog6d303" path="res://scenes/levels/camera.tscn" id="3_efdfl"]
+[ext_resource type="Script" uid="uid://cb2x0b18vipsn" path="res://scripts/global/camera.gd" id="4_uipvc"]
+[ext_resource type="PackedScene" uid="uid://bdlwf1cxmos5q" path="res://scenes/levels/canvas_modulate.tscn" id="5_lihyq"]
+
+[node name="the_siderooms" type="Node2D"]
+
+[node name="tile_map_layer" parent="." instance=ExtResource("1_kdopy")]
+
+[node name="player" parent="." instance=ExtResource("2_owfie")]
+
+[node name="camera" parent="." instance=ExtResource("3_efdfl")]
+zoom = Vector2(6, 6)
+script = ExtResource("4_uipvc")
+
+[node name="canvas_modulate" parent="." instance=ExtResource("5_lihyq")]

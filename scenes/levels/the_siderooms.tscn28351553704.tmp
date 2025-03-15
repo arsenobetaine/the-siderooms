@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3 uid="uid://3ksm7d0pb7w7"]
+
+[ext_resource type="Script" uid="uid://w0k7r4p48l3o" path="res://scripts/global/the_siderooms.gd" id="1_jyisb"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_jyisb"]
+device = -1
+keycode = 32
+unicode = 32
+
+[sub_resource type="Shortcut" id="Shortcut_owfie"]
+events = [SubResource("InputEventKey_jyisb")]
+
+[sub_resource type="CurveTexture" id="CurveTexture_jyisb"]
+width = 32
+
+[node name="the_siderooms" type="Node2D"]
+script = ExtResource("1_jyisb")
+
+[node name="canvas_layer" type="CanvasLayer" parent="."]
+
+[node name="background" type="ColorRect" parent="canvas_layer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="menu_container" type="VBoxContainer" parent="canvas_layer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.5
+offset_top = -20.0
+offset_right = 57.5
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="label" type="Label" parent="canvas_layer/menu_container"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+text = "The Siderooms"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="button" type="Button" parent="canvas_layer/menu_container"]
+layout_mode = 2
+shortcut = SubResource("Shortcut_owfie")
+icon = SubResource("CurveTexture_jyisb")
+
+[connection signal="pressed" from="canvas_layer/menu_container/button" to="." method="_on_button_pressed"]
