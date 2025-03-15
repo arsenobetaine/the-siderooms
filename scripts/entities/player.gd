@@ -1,13 +1,14 @@
 class_name player
 extends CharacterBody2D
 
-@export var speed = 400.0
+@export var speed = 200.0
 @export var base_energy: float = 1.0
 @export var flicker_intensity: float = 0.5
 @export var flicker_speed: float = 4.0
 
 @onready var animation_player = $"animated-sprite/animation-player"
 @onready var point_light = $"point-light"
+@onready var sprint_indicator = $"sprint-indicator"
 
 enum State {IDLE, WALKING}
 var last_direction = Vector2.DOWN
@@ -19,7 +20,7 @@ var flicker_interval: float = 0.0
 
 var sprint_multiplier: float = 1.5
 var sprint_duration: float = 2.0
-var sprint_cooldown: float = 8.0
+var sprint_cooldown: float = 3.0
 var sprint_timer: float = 0.0
 var cooldown_timer: float = 0.0
 var is_sprinting: bool = false
@@ -30,6 +31,7 @@ func _ready():
 	target_energy = base_energy
 	point_light.energy = current_energy
 	_set_next_flicker_interval()
+	sprint_indicator.visible = false
 
 func _physics_process(delta):
 	var input_vector = Vector2.ZERO
@@ -74,15 +76,20 @@ func _handle_sprint(delta):
 		if sprint_timer < sprint_duration:
 			is_sprinting = true
 			sprint_timer += delta
+			sprint_indicator.visible = true
+			sprint_indicator.value = sprint_duration - sprint_timer
 		else:
 			is_sprinting = false
 			cooldown_timer = sprint_cooldown
 			sprint_timer = 0.0
+			sprint_indicator.visible = false
 	else:
 		is_sprinting = false
 		if sprint_timer > 0 and cooldown_timer <= 0:
 			cooldown_timer = sprint_cooldown
 			sprint_timer = 0.0
+		sprint_indicator.visible = false
+		sprint_indicator.value = 0.0
 
 func update_animation():
 	var direction_string = "down"

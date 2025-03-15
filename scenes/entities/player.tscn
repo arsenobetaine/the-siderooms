@@ -418,3 +418,12 @@ position = Vector2(0, 1)
 shadow_enabled = true
 texture = ExtResource("3_1ie0h")
 texture_scale = 0.16
+
+[node name="sprint-indicator" type="ProgressBar" parent="."]
+visible = false
+offset_top = -29.0
+offset_right = 4.0
+offset_bottom = -2.0
+scale = Vector2(0.5, 0.5)
+max_value = 2.0
+rounded = true
