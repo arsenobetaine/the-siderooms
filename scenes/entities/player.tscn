@@ -389,14 +389,22 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0n8oc"]
-radius = 5.0
-height = 16.0
+radius = 9.47368
+height = 32.6316
 
 [node name="player" type="CharacterBody2D"]
 collision_layer = 257
 collision_mask = 257
 script = ExtResource("1_08t41")
-speed = 50.0
+
+[node name="sprint-indicator" type="ProgressBar" parent="."]
+visible = false
+offset_top = -29.0
+offset_right = 4.0
+offset_bottom = -2.0
+scale = Vector2(0.5, 0.5)
+max_value = 2.0
+rounded = true
 
 [node name="animated-sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_diiiv")
@@ -418,12 +426,3 @@ position = Vector2(0, 1)
 shadow_enabled = true
 texture = ExtResource("3_1ie0h")
 texture_scale = 0.16
-
-[node name="sprint-indicator" type="ProgressBar" parent="."]
-visible = false
-offset_top = -29.0
-offset_right = 4.0
-offset_bottom = -2.0
-scale = Vector2(0.5, 0.5)
-max_value = 2.0
-rounded = true
