@@ -30,7 +30,7 @@ func _physics_process(delta):
 	if distance < 2.0:
 		# Random movement within a circular radius
 		random_angle += randf_range(-0.1, 0.1) * delta
-		var random_radius = randf_range(0, random_move_radius)
+		var _random_radius = randf_range(0, random_move_radius)
 		var random_direction = Vector2(cos(random_angle), sin(random_angle)).normalized()
 		velocity = random_direction * circle_speed
 	else:
