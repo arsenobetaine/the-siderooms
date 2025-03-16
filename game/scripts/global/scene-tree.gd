@@ -1,3 +1,4 @@
+class_name scene_tree
 extends Node
 
 func print_scene_tree(node: Node, indent: String = ""):

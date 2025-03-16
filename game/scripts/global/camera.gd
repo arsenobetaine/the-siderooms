@@ -2,7 +2,7 @@ class_name camera
 extends Camera2D
 
 @export var follow_speed: float = 5.0
-@export var lookahead_distance: float = 50.0
+@export var lookahead_distance: float = 100.0
 
 @onready var player_cam = get_node("/root/level_one/player")
 

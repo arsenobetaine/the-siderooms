@@ -1,3 +1,4 @@
+class_name the_siderooms
 extends Node2D
 
 @onready var play_button = $"buttons/play-button"
