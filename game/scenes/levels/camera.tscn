@@ -4,3 +4,6 @@
 
 [node name="camera" type="Camera2D"]
 script = ExtResource("1_rtr5j")
+
+[node name="canvas-modulate" type="CanvasModulate" parent="."]
+color = Color(0.15, 0.15, 0.15, 1)

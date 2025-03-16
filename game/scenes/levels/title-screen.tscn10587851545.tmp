@@ -1,0 +1,162 @@
+[gd_scene load_steps=8 format=3 uid="uid://3ksm7d0pb7w7"]
+
+[ext_resource type="Script" uid="uid://6p1ql1rv6dlc" path="res://scripts/ui/title-screen.gd" id="1_pi6am"]
+[ext_resource type="Texture2D" uid="uid://cerfa7ivd83t8" path="res://assets/art/background.png" id="2_ugbs4"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jyisb"]
+texture = ExtResource("2_ugbs4")
+modulate_color = Color(0.270222, 0.270222, 0.270222, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jyisb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_owfie"]
+bg_color = Color(0.817521, 0.817521, 0.817521, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0.129558, 0.129558, 0.129558, 0.6)
+shadow_offset = Vector2(0, 2.28)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_efdfl"]
+bg_color = Color(0.650128, 0.650128, 0.650128, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0.129558, 0.129558, 0.129558, 0.6)
+shadow_offset = Vector2(0, 2.28)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jyisb"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0.129558, 0.129558, 0.129558, 0.6)
+shadow_offset = Vector2(0, 2.28)
+
+[node name="title-screen" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+script = ExtResource("1_pi6am")
+
+[node name="background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_jyisb")
+
+[node name="buttons" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -132.5
+offset_top = 18.0
+offset_right = 132.5
+offset_bottom = 153.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="play-button" type="Button" parent="buttons"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jyisb")
+theme_override_styles/hover = SubResource("StyleBoxFlat_owfie")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_efdfl")
+theme_override_styles/normal = SubResource("StyleBoxFlat_jyisb")
+text = "Play"
+
+[node name="quit-button" type="Button" parent="buttons"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jyisb")
+theme_override_styles/hover = SubResource("StyleBoxFlat_owfie")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_efdfl")
+theme_override_styles/normal = SubResource("StyleBoxFlat_jyisb")
+text = "Quit"
+
+[node name="top-right" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -75.0
+offset_bottom = 71.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="side-buttons" type="VBoxContainer" parent="top-right"]
+layout_mode = 2
+
+[node name="fullscreen-button" type="Button" parent="top-right/side-buttons"]
+layout_mode = 2
+text = "F11"
+
+[node name="bottom-right" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -111.0
+offset_top = -71.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="side-buttons" type="VBoxContainer" parent="bottom-right"]
+layout_mode = 2
+
+[node name="website-button" type="Button" parent="bottom-right/side-buttons"]
+layout_mode = 2
+text = "Website"
+
+[node name="title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -215.0
+offset_top = -134.0
+offset_right = 215.0
+offset_bottom = -51.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 60
+text = "The Siderooms"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="buttons/play-button" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="buttons/quit-button" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="top-right/side-buttons/fullscreen-button" to="." method="_on_fullscreen_button_pressed"]
+[connection signal="pressed" from="bottom-right/side-buttons/website-button" to="." method="_on_website_button_pressed"]

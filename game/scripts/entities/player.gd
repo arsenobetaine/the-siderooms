@@ -1,10 +1,10 @@
-class_name player
+class_name Player
 extends CharacterBody2D
 
 @export var speed: float = 75.0
 @export var speed_multiplier: float = 1.5
 
-@export var max_stamina: float = 2.0 
+@export var max_stamina: float = 2.0
 @export var cooldown_duration: float = 3.0
 var stamina_regen_rate: float = max_stamina / cooldown_duration
 var current_stamina: float = max_stamina
@@ -65,7 +65,7 @@ func _physics_process(delta: float) -> void:
 		if not is_blocked and velocity.length() > 1.0:
 			current_state = State.WALKING
 	
-	update_animation()
+	_update_animation()
 	_update_light(delta)
 
 func _handle_sprint(delta: float) -> void:
@@ -107,7 +107,7 @@ func _start_regeneration() -> void:
 	cooldown_timer = (max_stamina - current_stamina) / stamina_regen_rate
 	sprint_indicator.visible = true
 
-func update_animation() -> void:
+func _update_animation() -> void:
 	var direction_string: String = "down"
 	if last_direction.y < 0:
 		direction_string = "up"

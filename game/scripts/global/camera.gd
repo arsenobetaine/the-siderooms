@@ -1,17 +1,17 @@
-class_name camera
+class_name Camera
 extends Camera2D
 
 @export var follow_speed: float = 5.0
 @export var lookahead_distance: float = 100.0
 
-@onready var player_cam = get_node("/root/level_one/player")
+@onready var player = get_node("/root/level-one/player")
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	position = player_cam.position
+	position = player.position
 
 func _process(delta: float) -> void:
-	var target_position: Vector2 = player_cam.position
+	var target_position: Vector2 = player.position
 	var lookahead_vector: Vector2 = Vector2.ZERO
 	
 	if Input.is_action_pressed("ui_right"):
