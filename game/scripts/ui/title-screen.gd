@@ -43,4 +43,4 @@ func _handle_fullscreen() -> void:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 
 func _handle_website() -> void:
-	OS.shell_open("https://arsenobetaine.itch.io/the_siderooms")
+	OS.shell_open("https://the-siderooms.arsenobetaine.dev")

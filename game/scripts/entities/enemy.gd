@@ -1,60 +1,61 @@
 class_name Enemy
 extends CharacterBody2D
 
-@export var speed: float = 4.0
-@export var approach_speed: float = 4.0
-@export var circle_speed: float = 16.0
-@export var circle_radius: float = 256.0
-@export var min_circle_distance: float = 12.0
-@export var circle_angular_speed: float = 0.0
-@export var slow_angular_speed: float = 1.0
-@export var random_move_radius: float = 32.0
+@export var wander_radius: float = 50.0
+@export var wander_speed: float = 20.0
+@export var chase_speed: float = 50.0
+@export var detection_range: float = 100.0
 
-@onready var raycast: RayCast2D = $"ray-cast"
-@onready var player: Node = get_node("/root/level-one/player")
+@onready var player: Node2D = get_node("/root/level-one/player")
 @onready var touch_area: Area2D = $"touch-area"
+@onready var wait_timer: Timer = $"wait-timer"
+@onready var start_position: Vector2 = global_position
 
-var angle: float = 0.0
-var random_angle: float = 0.0
+enum State { WANDERING, CHASING, WAITING }
+var current_state: State = State.WANDERING
+var target_position: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	await get_tree().physics_frame
 	if touch_area:
 		touch_area.body_entered.connect(_on_body_entered)
+	wait_timer.wait_time = 0.5
+	wait_timer.one_shot = true
+	wait_timer.timeout.connect(_on_wait_timeout)
+	_set_random_target()
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var to_player = player.global_position - global_position
-	var distance = to_player.length()
+	var distance_to_player = to_player.length()
 
-	if distance < 2.0:
-		random_angle += randf_range(-0.1, 0.1) * delta
-		var random_direction = Vector2(cos(random_angle), sin(random_angle)).normalized()
-		velocity = random_direction * circle_speed
-	else:
-		if distance > circle_radius:
-			var direction = to_player.normalized()
-			raycast.target_position = direction * 32
-			raycast.add_exception(player)
-			raycast.force_raycast_update()
-			if raycast.is_colliding() and global_position.distance_to(raycast.get_collision_point()) < 16.0:
-				direction = direction.slide(raycast.get_collision_normal()).normalized()
-			raycast.remove_exception(player)
-			angle = 0.0
-			velocity = direction * approach_speed
-		else:
-			var direction = to_player.normalized()
-			if distance < min_circle_distance:
-				direction = (player.global_position - direction * min_circle_distance - global_position).normalized()
-				distance = min_circle_distance
-				angle += slow_angular_speed * delta
-			elif distance > circle_radius:
-				direction = (player.global_position - direction * circle_radius - global_position).normalized()
-				distance = circle_radius
-			angle += circle_angular_speed * delta
-			direction = (to_player.normalized().rotated(angle)).normalized()
-			velocity = direction * circle_speed
+	if distance_to_player < detection_range:
+		current_state = State.CHASING
+	elif distance_to_player > detection_range * 1.5:
+		if current_state == State.CHASING:
+			current_state = State.WANDERING
+			_set_random_target()
+
+	match current_state:
+		State.WANDERING:
+			if global_position.distance_to(target_position) < 10.0:
+				current_state = State.WAITING
+				wait_timer.start()
+			velocity = (target_position - global_position).normalized() * wander_speed
+		State.CHASING:
+			velocity = to_player.normalized() * chase_speed
+		State.WAITING:
+			velocity = Vector2.ZERO
 
 	move_and_slide()
+
+func _set_random_target() -> void:
+	var angle = randf() * 2.0 * PI
+	var radius = randf_range(wander_radius * 0.2, wander_radius)
+	target_position = start_position + Vector2(cos(angle), sin(angle)) * radius
+
+func _on_wait_timeout() -> void:
+	current_state = State.WANDERING
+	_set_random_target()
 
 func _on_body_entered(body: Node) -> void:
 	if body == self or body != player:

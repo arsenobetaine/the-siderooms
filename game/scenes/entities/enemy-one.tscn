@@ -27,3 +27,6 @@ collision_mask = 256
 
 [node name="collision-shape" type="CollisionShape2D" parent="touch-area"]
 shape = SubResource("CircleShape2D_67neu")
+
+[node name="wait-timer" type="Timer" parent="."]
+wait_time = 0.5
