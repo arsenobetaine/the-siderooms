@@ -1,36 +1,31 @@
 class_name Player
 extends CharacterBody2D
 
-# Movement properties
-@export var speed: float = 75.0  # Base movement speed in pixels per second
-@export var speed_multiplier: float = 1.5  # Speed multiplier when sprinting
+@export var speed: float = 75.0
+@export var speed_multiplier: float = 1.5
 
-# Stamina properties
-@export var max_stamina: float = 2.0  # Maximum sprint duration in seconds
-@export var cooldown_duration: float = 3.0  # Cooldown duration after sprinting
-var stamina_regen_rate: float = max_stamina / cooldown_duration  # Stamina regeneration rate
-var current_stamina: float = max_stamina  # Current stamina level
-var cooldown_timer: float = 0.0  # Timer for stamina regeneration cooldown
-var hide_delay_timer: float = 0.0  # Timer for hiding sprint indicator after full stamina
-var is_sprinting: bool = false  # Whether the player is currently sprinting
-var is_regenerating: bool = false  # Whether stamina is regenerating
-const HIDE_DELAY: float = 0.5  # Delay before hiding sprint indicator after full stamina
+@export var max_stamina: float = 2.0 
+@export var cooldown_duration: float = 3.0
+var stamina_regen_rate: float = max_stamina / cooldown_duration
+var current_stamina: float = max_stamina
+var cooldown_timer: float = 0.0
+var hide_delay_timer: float = 0.0
+var is_sprinting: bool = false
+var is_regenerating: bool = false
+const HIDE_DELAY: float = 0.5
 
-# Lighting properties
-@export var base_energy: float = 1.0  # Base light energy level
-@export var flicker_intensity: float = 0.5  # Intensity of light flickering
-@export var flicker_speed: float = 4.0  # Speed of light flickering
-var current_energy: float = 1.0  # Current light energy level
-var target_energy: float = 1.0  # Target light energy level for flickering
-var flicker_timer: float = 0.0  # Timer for next flicker
-var flicker_interval: float = 0.0  # Interval between flickers
+@export var base_energy: float = 1.0
+@export var flicker_intensity: float = 0.5
+@export var flicker_speed: float = 4.0
+var current_energy: float = 1.0
+var target_energy: float = 1.0
+var flicker_timer: float = 0.0
+var flicker_interval: float = 0.0
 
-# Animation and state
 enum State {IDLE, WALKING}
-var last_direction: Vector2 = Vector2.DOWN  # Last movement direction for animations
-var current_state: State = State.IDLE  # Current player state (idle or walking)
+var last_direction: Vector2 = Vector2.DOWN
+var current_state: State = State.IDLE
 
-# Node references
 @onready var animation_player: AnimationPlayer = $"animated-sprite/animation-player"
 @onready var point_light: PointLight2D = $"point-light"
 @onready var sprint_indicator: ProgressBar = $"sprint-indicator"
@@ -46,7 +41,6 @@ func _ready() -> void:
 	sprint_indicator.visible = false
 
 func _physics_process(delta: float) -> void:
-	# Handle movement input
 	var input_vector: Vector2 = Vector2.ZERO
 	input_vector.x = Input.get_axis("A", "D")
 	input_vector.y = Input.get_axis("W", "S")
@@ -55,13 +49,11 @@ func _physics_process(delta: float) -> void:
 		input_vector = input_vector.normalized()
 		last_direction = input_vector
 	
-	# Update sprinting and movement
 	_handle_sprint(delta)
 	var current_speed: float = speed * (speed_multiplier if is_sprinting else 1.0)
 	velocity = input_vector * current_speed
 	move_and_slide()
 	
-	# Update state based on movement
 	current_state = State.IDLE
 	if input_vector != Vector2.ZERO:
 		var is_blocked: bool = false
@@ -73,12 +65,10 @@ func _physics_process(delta: float) -> void:
 		if not is_blocked and velocity.length() > 1.0:
 			current_state = State.WALKING
 	
-	# Update animations and lighting
 	update_animation()
 	_update_light(delta)
 
 func _handle_sprint(delta: float) -> void:
-	# Handle stamina regeneration
 	if is_regenerating:
 		cooldown_timer -= delta
 		current_stamina = min(max_stamina, current_stamina + stamina_regen_rate * delta)
@@ -89,13 +79,11 @@ func _handle_sprint(delta: float) -> void:
 		if cooldown_timer <= 0:
 			cooldown_timer = 0.0
 	
-	# Handle hiding sprint indicator after delay
 	if hide_delay_timer > 0:
 		hide_delay_timer -= delta
 		if hide_delay_timer <= 0:
 			sprint_indicator.visible = false
 	
-	# Handle sprint input
 	if Input.is_key_pressed(KEY_SHIFT) and current_stamina > 0:
 		if current_stamina > delta:
 			is_sprinting = true
@@ -120,7 +108,6 @@ func _start_regeneration() -> void:
 	sprint_indicator.visible = true
 
 func update_animation() -> void:
-	# Determine direction string for animation
 	var direction_string: String = "down"
 	if last_direction.y < 0:
 		direction_string = "up"
@@ -129,14 +116,12 @@ func update_animation() -> void:
 	elif last_direction.x > 0:
 		direction_string = "right"
 	
-	# Determine state string and play animation
 	var state_string: String = "idle" if current_state == State.IDLE else "walk"
 	var animation_name: String = state_string + "_" + direction_string
 	if animation_player.current_animation != animation_name:
 		animation_player.play(animation_name)
 
 func _update_light(delta: float) -> void:
-	# Update light flickering
 	flicker_timer -= delta
 	if flicker_timer <= 0:
 		target_energy = clamp(base_energy + randf_range(-flicker_intensity, flicker_intensity), 0.2, base_energy)
