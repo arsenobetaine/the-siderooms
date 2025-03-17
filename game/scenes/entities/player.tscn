@@ -430,6 +430,7 @@ shape = SubResource("CapsuleShape2D_0n8oc")
 
 [node name="point-light" type="PointLight2D" parent="."]
 position = Vector2(0, 1)
+range_item_cull_mask = 3
 shadow_enabled = true
 shadow_filter = 1
 texture = ExtResource("3_1ie0h")

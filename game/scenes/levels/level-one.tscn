@@ -40,7 +40,7 @@ position = Vector2(306, 27)
 position = Vector2(301, -25)
 
 [node name="exit-portal" parent="." instance=ExtResource("5_5r8sh")]
-position = Vector2(220, -47)
+position = Vector2(-111, -185)
 scale = Vector2(2, 2)
 
 [node name="player" parent="." instance=ExtResource("2_kc86w")]

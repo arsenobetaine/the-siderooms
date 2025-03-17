@@ -15,7 +15,6 @@ func _process(_delta):
 		var player = get_node_or_null("/root/level-one/player")
 		if player and player is Player:
 			player.inventory["rubies"] += 1
-			print("yay {player} has collected a ruby! current ruby count: ", player.inventory["rubies"])
 			emit_signal("collected")
 			queue_free()
 
