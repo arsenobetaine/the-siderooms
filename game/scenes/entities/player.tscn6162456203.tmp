@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://ckg76mq128fgd"]
+[gd_scene load_steps=50 format=3 uid="uid://ckg76mq128fgd"]
 
 [ext_resource type="Script" uid="uid://dm06dc17qu5vo" path="res://scripts/entities/player.gd" id="1_08t41"]
 [ext_resource type="Texture2D" uid="uid://dhp5xcxng3e6f" path="res://assets/art/player-sprites.png" id="2_1ie0h"]
@@ -392,9 +392,6 @@ _data = {
 radius = 9.47368
 height = 31.0
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1ie0h"]
-light_mode = 1
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ie0h"]
 bg_color = Color(0.2, 0.2, 0.2, 1)
 corner_radius_top_left = 32
@@ -403,7 +400,7 @@ corner_radius_bottom_right = 32
 corner_radius_bottom_left = 32
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_42nxq"]
-bg_color = Color(0.439216, 0.74902, 0.960784, 1)
+bg_color = Color(0.490864, 0.745087, 0.923803, 1)
 corner_radius_top_left = 32
 corner_radius_top_right = 32
 corner_radius_bottom_right = 32
@@ -435,8 +432,10 @@ shadow_filter = 1
 texture = ExtResource("3_1ie0h")
 texture_scale = 0.16
 
-[node name="sprint-indicator" type="ProgressBar" parent="."]
-material = SubResource("CanvasItemMaterial_1ie0h")
+[node name="ui" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="sprint-indicator" type="ProgressBar" parent="ui"]
 offset_left = -8.0
 offset_top = -22.0
 offset_right = 24.0
@@ -444,6 +443,6 @@ offset_bottom = -18.0
 scale = Vector2(0.5, 0.5)
 theme_override_styles/background = SubResource("StyleBoxFlat_1ie0h")
 theme_override_styles/fill = SubResource("StyleBoxFlat_42nxq")
-step = 0.0
+max_value = 2.0
 rounded = true
 show_percentage = false

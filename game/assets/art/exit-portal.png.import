@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cerfa7ivd83t8"
-path="res://.godot/imported/background.png-1f9d514c213d58a0c1a6e574785ace8e.ctex"
+uid="uid://cd1kfcimv5rh2"
+path="res://.godot/imported/exit-portal.png-5d036d1c14047cfbc62c10b9f8a02ecf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/background.png"
-dest_files=["res://.godot/imported/background.png-1f9d514c213d58a0c1a6e574785ace8e.ctex"]
+source_file="res://assets/art/exit-portal.png"
+dest_files=["res://.godot/imported/exit-portal.png-5d036d1c14047cfbc62c10b9f8a02ecf.ctex"]
 
 [params]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b3q4856gy3c28"]
 
 [ext_resource type="Script" uid="uid://dlu5ok67xuunv" path="res://scripts/global/exit.gd" id="1_cohyv"]
-[ext_resource type="Texture2D" uid="uid://cd1kfcimv5rh2" path="res://assets/art/exit.png" id="2_6ioyk"]
+[ext_resource type="Texture2D" uid="uid://cd1kfcimv5rh2" path="res://assets/art/exit-portal.png" id="2_6ioyk"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w53h0"]
 radius = 3.0

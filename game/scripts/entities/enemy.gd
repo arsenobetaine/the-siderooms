@@ -1,7 +1,7 @@
 class_name Enemy
 extends CharacterBody2D
 
-@export var wander_radius: float = 50.0
+@export var wander_radius: float = 32.0
 @export var wander_speed: float = 20.0
 @export var chase_speed: float = 50.0
 @export var detection_range: float = 100.0
@@ -19,7 +19,7 @@ func _ready() -> void:
 	await get_tree().physics_frame
 	if touch_area:
 		touch_area.body_entered.connect(_on_body_entered)
-	wait_timer.wait_time = 0.5
+	wait_timer.wait_time = 2.0
 	wait_timer.one_shot = true
 	wait_timer.timeout.connect(_on_wait_timeout)
 	_set_random_target()

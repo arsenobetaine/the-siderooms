@@ -36,8 +36,10 @@ func _ready() -> void:
 	target_energy = base_energy
 	point_light.energy = current_energy
 	_set_next_flicker_interval()
-	sprint_indicator.max_value = max_stamina
-	sprint_indicator.value = current_stamina
+	# Configure ProgressBar
+	sprint_indicator.max_value = 100.0  # Set to percentage scale
+	sprint_indicator.value = (current_stamina / max_stamina) * 100.0  # Map stamina to percentage
+	sprint_indicator.step = 0.0  # Ensure smooth updates
 	sprint_indicator.visible = false
 
 func _physics_process(delta: float) -> void:
@@ -49,7 +51,7 @@ func _physics_process(delta: float) -> void:
 		input_vector = input_vector.normalized()
 		last_direction = input_vector
 	
-	_handle_sprint(delta)
+	_handle_sprint(delta, input_vector)
 	var current_speed: float = speed * (speed_multiplier if is_sprinting else 1.0)
 	velocity = input_vector * current_speed
 	move_and_slide()
@@ -67,12 +69,12 @@ func _physics_process(delta: float) -> void:
 	
 	_update_animation()
 	_update_light(delta)
+	sprint_indicator.value = (current_stamina / max_stamina) * 100.0
 
-func _handle_sprint(delta: float) -> void:
+func _handle_sprint(delta: float, input_vector: Vector2) -> void:
 	if is_regenerating:
 		cooldown_timer -= delta
 		current_stamina = min(max_stamina, current_stamina + stamina_regen_rate * delta)
-		sprint_indicator.value = current_stamina
 		if is_equal_approx(current_stamina, max_stamina):
 			is_regenerating = false
 			hide_delay_timer = HIDE_DELAY
@@ -84,18 +86,16 @@ func _handle_sprint(delta: float) -> void:
 		if hide_delay_timer <= 0:
 			sprint_indicator.visible = false
 	
-	if Input.is_key_pressed(KEY_SHIFT) and current_stamina > 0:
+	if Input.is_key_pressed(KEY_SHIFT) and current_stamina > 0 and input_vector != Vector2.ZERO:
 		if current_stamina > delta:
 			is_sprinting = true
 			current_stamina -= delta
-			sprint_indicator.value = current_stamina
 			sprint_indicator.visible = true
 			is_regenerating = false
 			cooldown_timer = 0.0
 		else:
 			is_sprinting = false
 			current_stamina = 0.0
-			sprint_indicator.value = current_stamina
 			_start_regeneration()
 	else:
 		is_sprinting = false
@@ -118,8 +118,14 @@ func _update_animation() -> void:
 	
 	var state_string: String = "idle" if current_state == State.IDLE else "walk"
 	var animation_name: String = state_string + "_" + direction_string
+	
 	if animation_player.current_animation != animation_name:
 		animation_player.play(animation_name)
+	
+	if current_state == State.WALKING:
+		animation_player.speed_scale = speed_multiplier if is_sprinting else 1.0
+	else:
+		animation_player.speed_scale = 1.0
 
 func _update_light(delta: float) -> void:
 	flicker_timer -= delta

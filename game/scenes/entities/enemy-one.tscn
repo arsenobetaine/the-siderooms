@@ -1,32 +1,46 @@
-[gd_scene load_steps=5 format=3 uid="uid://5j4jdoo6opje"]
+[gd_scene load_steps=6 format=3 uid="uid://5j4jdoo6opje"]
 
 [ext_resource type="Script" uid="uid://de8wk8s4tmcvw" path="res://scripts/entities/enemy.gd" id="1_67neu"]
-[ext_resource type="Texture2D" uid="uid://b1gy1fvkp3umo" path="res://assets/art/player-light-asset.png" id="2_67neu"]
+[ext_resource type="Texture2D" uid="uid://c1jhppyqm0cuv" path="res://assets/art/Icon25.png" id="2_o2xge"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ktqfp"]
 radius = 4.0
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_s7h8t"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"enemy-one",
+"speed": 5.0
+}]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_67neu"]
-radius = 5.0
+radius = 4.0
 
 [node name="enemy" type="CharacterBody2D"]
 script = ExtResource("1_67neu")
-
-[node name="sprite" type="Sprite2D" parent="."]
-scale = Vector2(0.01, 0.01)
-texture = ExtResource("2_67neu")
 
 [node name="collision_shape" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ktqfp")
 
 [node name="ray-cast" type="RayCast2D" parent="."]
 
+[node name="animated-sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_s7h8t")
+animation = &"enemy-one"
+
+[node name="animation-player" type="AnimationPlayer" parent="animated-sprite"]
+root_node = NodePath("../..")
+
 [node name="touch-area" type="Area2D" parent="."]
 collision_layer = 256
 collision_mask = 256
 
 [node name="collision-shape" type="CollisionShape2D" parent="touch-area"]
+scale = Vector2(1.01, 1.01)
 shape = SubResource("CircleShape2D_67neu")
 
 [node name="wait-timer" type="Timer" parent="."]
-wait_time = 0.5
+
+[node name="sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_o2xge")
