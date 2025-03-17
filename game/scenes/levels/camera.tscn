@@ -1,9 +1,112 @@
-[gd_scene load_steps=2 format=3 uid="uid://dwrnf3hvh5t83"]
+[gd_scene load_steps=13 format=3 uid="uid://dwrnf3hvh5t83"]
 
 [ext_resource type="Script" uid="uid://cb2x0b18vipsn" path="res://scripts/global/camera.gd" id="1_rtr5j"]
+[ext_resource type="Texture2D" uid="uid://bswfmhe24d77y" path="res://assets/keys/w-key.png" id="2_4aa83"]
+[ext_resource type="Texture2D" uid="uid://c7bdi8yquybsx" path="res://assets/keys/a-key.png" id="3_a6l8m"]
+[ext_resource type="Texture2D" uid="uid://wp5nm5x43yq1" path="res://assets/keys/s-key.png" id="4_u665n"]
+[ext_resource type="Texture2D" uid="uid://ci7v03goblxy1" path="res://assets/keys/d-key.png" id="5_5j3aa"]
+[ext_resource type="Texture2D" uid="uid://b8wyuwaqf03ct" path="res://assets/keys/up-key.png" id="6_3b43g"]
+[ext_resource type="Texture2D" uid="uid://cg585557u4v7w" path="res://assets/keys/left-key.png" id="7_mtd0n"]
+[ext_resource type="Texture2D" uid="uid://e11pd3bu6sfn" path="res://assets/keys/down-key.png" id="8_rmpv0"]
+[ext_resource type="Texture2D" uid="uid://cgk13s32hr8mu" path="res://assets/keys/right-key.png" id="9_iy2iv"]
+[ext_resource type="Texture2D" uid="uid://c34f2rcbr5ph" path="res://assets/keys/shift-key.png" id="10_x0e00"]
+[ext_resource type="Texture2D" uid="uid://crgqet82a1tye" path="res://assets/keys/f11-key.png" id="11_hohvs"]
+[ext_resource type="Texture2D" uid="uid://cxb6k0ynxnvxs" path="res://assets/keys/esc-key.png" id="12_h7tk6"]
 
 [node name="camera" type="Camera2D"]
+zoom = Vector2(4, 4)
 script = ExtResource("1_rtr5j")
 
 [node name="canvas-modulate" type="CanvasModulate" parent="."]
 color = Color(0.15, 0.15, 0.15, 1)
+
+[node name="ui" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="w-key" type="TextureRect" parent="ui"]
+offset_left = -180.0
+offset_top = 68.0
+offset_right = -80.0
+offset_bottom = 168.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_4aa83")
+
+[node name="a-key" type="TextureRect" parent="ui"]
+offset_left = -200.0
+offset_top = 87.0
+offset_right = -100.0
+offset_bottom = 187.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_a6l8m")
+
+[node name="s-key" type="TextureRect" parent="ui"]
+offset_left = -180.0
+offset_top = 87.0
+offset_right = -80.0
+offset_bottom = 187.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_u665n")
+
+[node name="d-key" type="TextureRect" parent="ui"]
+offset_left = -160.0
+offset_top = 87.0
+offset_right = -60.0
+offset_bottom = 187.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("5_5j3aa")
+
+[node name="up-key" type="TextureRect" parent="ui"]
+offset_left = 155.0
+offset_top = 68.0
+offset_right = 255.0
+offset_bottom = 168.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("6_3b43g")
+
+[node name="left-key" type="TextureRect" parent="ui"]
+offset_left = 135.0
+offset_top = 87.0
+offset_right = 235.0
+offset_bottom = 187.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("7_mtd0n")
+
+[node name="down-key" type="TextureRect" parent="ui"]
+offset_left = 155.0
+offset_top = 87.0
+offset_right = 255.0
+offset_bottom = 187.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_rmpv0")
+
+[node name="right-key" type="TextureRect" parent="ui"]
+offset_left = 175.0
+offset_top = 87.0
+offset_right = 275.0
+offset_bottom = 187.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("9_iy2iv")
+
+[node name="shift-key" type="TextureRect" parent="ui"]
+offset_left = -231.0
+offset_top = 104.0
+offset_right = -131.0
+offset_bottom = 204.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("10_x0e00")
+
+[node name="f11-key" type="TextureRect" parent="ui"]
+offset_left = 208.0
+offset_top = -128.0
+offset_right = 308.0
+offset_bottom = -28.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("11_hohvs")
+
+[node name="esc-key" type="TextureRect" parent="ui"]
+offset_left = -233.0
+offset_top = -129.0
+offset_right = -133.0
+offset_bottom = -29.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("12_h7tk6")
