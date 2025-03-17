@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://bjc7v3bxipwfr"]
+[gd_scene load_steps=9 format=4 uid="uid://bjc7v3bxipwfr"]
 
 [ext_resource type="PackedScene" uid="uid://hu68fs8f8nx5" path="res://scenes/levels/tile-map-layer.tscn" id="1_w72ii"]
 [ext_resource type="PackedScene" uid="uid://ckg76mq128fgd" path="res://scenes/entities/player.tscn" id="2_kc86w"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b3q4856gy3c28" path="res://scenes/levels/exit-portal.tscn" id="5_5r8sh"]
 [ext_resource type="PackedScene" uid="uid://bdem6pkqjpo87" path="res://scenes/ui/key-bindings.tscn" id="6_2h3hn"]
 [ext_resource type="PackedScene" uid="uid://5j4jdoo6opje" path="res://scenes/entities/enemy-one.tscn" id="7_2viun"]
+[ext_resource type="PackedScene" uid="uid://dxjtsc3xrwiqg" path="res://scenes/entities/ruby.tscn" id="8_7whqj"]
 [ext_resource type="PackedScene" uid="uid://waitu44pxvb4" path="res://scenes/levels/scene-tree.tscn" id="9_vfmll"]
 
 [node name="level-one" type="Node2D"]
@@ -29,13 +30,18 @@ scale = Vector2(2, 2)
 position = Vector2(0, 320)
 scale = Vector2(2, 2)
 
-[node name="enemy4" parent="." instance=ExtResource("7_2viun")]
-position = Vector2(320, 0)
-scale = Vector2(2, 2)
+[node name="ruby" parent="." instance=ExtResource("8_7whqj")]
+position = Vector2(307, 0)
+
+[node name="ruby2" parent="." instance=ExtResource("8_7whqj")]
+position = Vector2(306, 27)
+
+[node name="ruby3" parent="." instance=ExtResource("8_7whqj")]
+position = Vector2(301, -25)
 
 [node name="player" parent="." instance=ExtResource("2_kc86w")]
 
-[node name="exit" parent="." instance=ExtResource("5_5r8sh")]
+[node name="exit-portal" parent="." instance=ExtResource("5_5r8sh")]
 position = Vector2(220, -47)
 scale = Vector2(2, 2)
 

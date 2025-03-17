@@ -12,10 +12,12 @@ func _ready() -> void:
 	scene_tree = get_tree()
 	play_button.button_up.connect(_handle_play)
 	quit_button.button_up.connect(_handle_quit)
-	if fullscreen_button.pressed.is_connected(_handle_fullscreen):
-		fullscreen_button.pressed.disconnect(_handle_fullscreen)
-	fullscreen_button.pressed.connect(_handle_fullscreen)
-	website_button.button_up.connect(_handle_website)
+	
+	if not fullscreen_button.pressed.is_connected(_handle_fullscreen):
+		fullscreen_button.pressed.connect(_handle_fullscreen)
+	
+	if not website_button.pressed.is_connected(_handle_website):
+		website_button.pressed.connect(_handle_website)
 
 func _handle_play() -> void:
 	call_deferred("_deferred_change_scene")

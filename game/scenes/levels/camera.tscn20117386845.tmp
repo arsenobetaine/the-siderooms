@@ -19,6 +19,8 @@
 [node name="camera" type="Camera2D"]
 zoom = Vector2(4, 4)
 script = ExtResource("1_rtr5j")
+follow_speed = null
+lookahead_distance = null
 
 [node name="canvas-modulate" type="CanvasModulate" parent="."]
 color = Color(0.15, 0.15, 0.15, 1)
@@ -44,33 +46,18 @@ texture = ExtResource("2_3b43g")
 
 [node name="slot-one" type="TextureRect" parent="ui/inventory"]
 layout_mode = 0
-offset_left = -6.0
-offset_top = 20.0
-offset_right = 21.0
-offset_bottom = 47.0
-scale = Vector2(0.52, 0.52)
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="slot-two" type="TextureRect" parent="ui/inventory"]
 layout_mode = 0
-offset_right = 16.0
-offset_bottom = 16.0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="slot-three" type="TextureRect" parent="ui/inventory"]
 layout_mode = 0
-offset_right = 16.0
-offset_bottom = 16.0
-
-[node name="ruby-count" type="Label" parent="ui/inventory"]
-layout_mode = 0
-offset_left = 6.0
-offset_top = 29.0
-offset_right = 63.0
-offset_bottom = 166.0
-scale = Vector2(0.04, 0.04)
-theme_override_colors/font_color = Color(0.737255, 0.796078, 0.768627, 1)
-theme_override_font_sizes/font_size = 100
-horizontal_alignment = 2
-vertical_alignment = 2
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="q-key" type="TextureRect" parent="ui"]
 offset_left = -196.0

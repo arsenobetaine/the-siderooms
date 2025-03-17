@@ -1,4 +1,4 @@
-class_name Exit
+class_name ExitPortal
 extends Area2D
 
 @export var next_scene_path: String = "res://scenes/levels/title-screen.tscn"

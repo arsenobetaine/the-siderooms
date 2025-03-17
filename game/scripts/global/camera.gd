@@ -19,10 +19,23 @@ extends Camera2D
 @onready var shift_key: TextureRect = $"ui/shift-key"
 @onready var e_key: TextureRect = $"ui/e-key"
 @onready var q_key: TextureRect = $"ui/q-key"
+@onready var inventory: Control = $ui/inventory
+@onready var background: TextureRect = $ui/inventory/background
+@onready var slot1: TextureRect = $"ui/inventory/slot-one"
+@onready var slot2: TextureRect = $"ui/inventory/slot-two"
+@onready var slot3: TextureRect = $"ui/inventory/slot-three"
+@onready var ruby_count_label: Label = $"ui/inventory/ruby-count"
+
+var ruby_texture: Texture2D = preload("res://assets/art/ruby.png")
+var pressed_color: Color = Color(0.8, 0.8, 0.8, 1)
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	position = player.position
+	inventory.visible = false
+	ruby_count_label.visible = false
+	update_inventory()
+	get_tree().node_added.connect(_on_scene_changed)
 
 func _process(delta):
 	var target_position = player.position
@@ -30,71 +43,87 @@ func _process(delta):
 	
 	if Input.is_action_pressed("ui_right"):
 		lookahead_vector.x += 1
-		right_key.modulate = Color(0.8, 0.8, 0.8, 1)
+		right_key.modulate = pressed_color
 	else:
-		right_key.modulate = Color(1, 1, 1, 1)
+		right_key.modulate = Color.WHITE
 	if Input.is_action_pressed("ui_left"):
 		lookahead_vector.x -= 1
-		left_key.modulate = Color(0.8, 0.8, 0.8, 1)
+		left_key.modulate = pressed_color
 	else:
-		left_key.modulate = Color(1, 1, 1, 1)
+		left_key.modulate = Color.WHITE
 	if Input.is_action_pressed("ui_down"):
 		lookahead_vector.y += 1
-		down_key.modulate = Color(0.8, 0.8, 0.8, 1)
+		down_key.modulate = pressed_color
 	else:
-		down_key.modulate = Color(1, 1, 1, 1)
+		down_key.modulate = Color.WHITE
 	if Input.is_action_pressed("ui_up"):
 		lookahead_vector.y -= 1
-		up_key.modulate = Color(0.8, 0.8, 0.8, 1)
+		up_key.modulate = pressed_color
 	else:
-		up_key.modulate = Color(1, 1, 1, 1)
+		up_key.modulate = Color.WHITE
 	
 	if Input.is_key_pressed(KEY_W):
-		w_key.modulate = Color(0.8, 0.8, 0.8, 1)
+		w_key.modulate = pressed_color
 	else:
-		w_key.modulate = Color(1, 1, 1, 1)
+		w_key.modulate = Color.WHITE
 	if Input.is_key_pressed(KEY_A):
-		a_key.modulate = Color(0.8, 0.8, 0.8, 1)
+		a_key.modulate = pressed_color
 	else:
-		a_key.modulate = Color(1, 1, 1, 1)
+		a_key.modulate = Color.WHITE
 	if Input.is_key_pressed(KEY_S):
-		s_key.modulate = Color(0.8, 0.8, 0.8, 1)
+		s_key.modulate = pressed_color
 	else:
-		s_key.modulate = Color(1, 1, 1, 1)
+		s_key.modulate = Color.WHITE
 	if Input.is_key_pressed(KEY_D):
-		d_key.modulate = Color(0.8, 0.8, 0.8, 1)
+		d_key.modulate = pressed_color
 	else:
-		d_key.modulate = Color(1, 1, 1, 1)
-	
+		d_key.modulate = Color.WHITE
 	if Input.is_key_pressed(KEY_F11):
-		f11_key.modulate = Color(0.8, 0.8, 0.8, 1)
+		f11_key.modulate = pressed_color
 	else:
-		f11_key.modulate = Color(1, 1, 1, 1)
+		f11_key.modulate = Color.WHITE
 	if Input.is_key_pressed(KEY_ESCAPE):
-		esc_key.modulate = Color(0.8, 0.8, 0.8, 1)
+		esc_key.modulate = pressed_color
 	else:
-		esc_key.modulate = Color(1, 1, 1, 1)
-	
+		esc_key.modulate = Color.WHITE
 	if Input.is_key_pressed(KEY_SHIFT):
-		shift_key.modulate = Color(0.8, 0.8, 0.8, 1)
+		shift_key.modulate = pressed_color
 	else:
-		shift_key.modulate = Color(1, 1, 1, 1)
-	
+		shift_key.modulate = Color.WHITE
 	if Input.is_key_pressed(KEY_E):
-		e_key.modulate = Color(0.8, 0.8, 0.8, 1)
+		e_key.modulate = pressed_color
+		if Input.is_action_just_pressed("E"):
+			inventory.visible = !inventory.visible
 	else:
-		e_key.modulate = Color(1, 1, 1, 1)
-	
+		e_key.modulate = Color.WHITE
 	if Input.is_key_pressed(KEY_Q):
-		q_key.modulate = Color(0.8, 0.8, 0.8, 1)
+		q_key.modulate = pressed_color
 	else:
-		q_key.modulate = Color(1, 1, 1, 1)
+		q_key.modulate = Color.WHITE
 	
-	if lookahead_vector != Vector2.ZERO:
+	if inventory.visible:
+		update_inventory()
+	
+	if lookahead_vector:
 		lookahead_vector = lookahead_vector.normalized()
 		target_position += lookahead_vector * lookahead_distance
 	
 	var lerp_factor = 1.0 - exp(-follow_speed * delta)
 	position = position.lerp(target_position, lerp_factor)
-	if ui != null:
+	if ui:
 		ui.offset = position
+
+func update_inventory():
+	if player and "inventory" in player and player.inventory["rubies"] > 0:
+		slot1.texture = ruby_texture
+		ruby_count_label.text = str(player.inventory["rubies"])
+		ruby_count_label.visible = true
+	else:
+		slot1.texture = null
+		ruby_count_label.text = "0"
+		ruby_count_label.visible = false
+
+func _on_scene_changed(_node: Node = null):
+	if player and "inventory" in player:
+		player.inventory["rubies"] = 0
+	update_inventory()
