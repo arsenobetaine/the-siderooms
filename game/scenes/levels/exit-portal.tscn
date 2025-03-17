@@ -37,7 +37,7 @@ script = ExtResource("1_cohyv")
 light_mask = 2
 sprite_frames = SubResource("SpriteFrames_oifi0")
 animation = &"portal"
-frame_progress = 0.56237
+frame_progress = 0.299272
 
 [node name="collision-shape" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 3)
