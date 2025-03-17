@@ -30,32 +30,22 @@ var current_state: State = State.IDLE
 @onready var point_light: PointLight2D = $"point-light"
 @onready var sprint_indicator: ProgressBar = $"sprint-indicator"
 
-# Touch input state (to be set by camera.gd or another script)
-var w_pressed: bool = false
-var a_pressed: bool = false
-var s_pressed: bool = false
-var d_pressed: bool = false
-var up_pressed: bool = false
-var down_pressed: bool = false
-var left_pressed: bool = false
-var right_pressed: bool = false
-var shift_pressed: bool = false
-
 func _ready() -> void:
 	animation_player.play("idle_down")
 	current_energy = base_energy
 	target_energy = base_energy
 	point_light.energy = current_energy
 	_set_next_flicker_interval()
-	sprint_indicator.max_value = 100.0
-	sprint_indicator.value = (current_stamina / max_stamina) * 100.0
-	sprint_indicator.step = 0.0
+	# Configure ProgressBar
+	sprint_indicator.max_value = 100.0  # Set to percentage scale
+	sprint_indicator.value = (current_stamina / max_stamina) * 100.0  # Map stamina to percentage
+	sprint_indicator.step = 0.0  # Ensure smooth updates
 	sprint_indicator.visible = false
 
 func _physics_process(delta: float) -> void:
 	var input_vector: Vector2 = Vector2.ZERO
-	input_vector.x = (Input.get_axis("A", "D") as float) + (int(a_pressed) - int(d_pressed))
-	input_vector.y = (Input.get_axis("W", "S") as float) + (int(w_pressed) - int(s_pressed))
+	input_vector.x = Input.get_axis("A", "D")
+	input_vector.y = Input.get_axis("W", "S")
 	
 	if input_vector != Vector2.ZERO:
 		input_vector = input_vector.normalized()
@@ -96,7 +86,7 @@ func _handle_sprint(delta: float, input_vector: Vector2) -> void:
 		if hide_delay_timer <= 0:
 			sprint_indicator.visible = false
 	
-	if (Input.is_key_pressed(KEY_SHIFT) or shift_pressed) and current_stamina > 0 and input_vector != Vector2.ZERO:
+	if Input.is_key_pressed(KEY_SHIFT) and current_stamina > 0 and input_vector != Vector2.ZERO:
 		if current_stamina > delta:
 			is_sprinting = true
 			current_stamina -= delta

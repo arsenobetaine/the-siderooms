@@ -25,67 +25,93 @@ color = Color(0.15, 0.15, 0.15, 1)
 [node name="ui" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
 
-[node name="q-key" type="TouchScreenButton" parent="ui"]
-position = Vector2(-200, 68)
-scale = Vector2(0.25, 0.25)
-texture_normal = ExtResource("2_5j3aa")
+[node name="q-key" type="TextureRect" parent="ui"]
+offset_left = -196.0
+offset_top = 84.0
+offset_right = -183.0
+offset_bottom = 95.0
+texture = ExtResource("2_5j3aa")
 
-[node name="w-key" type="TouchScreenButton" parent="ui"]
-position = Vector2(-180, 68)
-scale = Vector2(0.25, 0.25)
-texture_normal = ExtResource("2_4aa83")
+[node name="w-key" type="TextureRect" parent="ui"]
+offset_left = -181.0
+offset_top = 84.0
+offset_right = -168.0
+offset_bottom = 95.0
+texture = ExtResource("2_4aa83")
 
-[node name="e-key" type="TouchScreenButton" parent="ui"]
-position = Vector2(-160, 68)
-scale = Vector2(0.25, 0.25)
-texture_normal = ExtResource("4_3b43g")
+[node name="e-key" type="TextureRect" parent="ui"]
+offset_left = -166.0
+offset_top = 84.0
+offset_right = -153.0
+offset_bottom = 95.0
+texture = ExtResource("4_3b43g")
 
-[node name="a-key" type="TouchScreenButton" parent="ui"]
-position = Vector2(-200, 87)
-scale = Vector2(0.25, 0.25)
-texture_normal = ExtResource("3_a6l8m")
+[node name="a-key" type="TextureRect" parent="ui"]
+offset_left = -196.0
+offset_top = 97.0
+offset_right = -183.0
+offset_bottom = 108.0
+texture = ExtResource("3_a6l8m")
 
-[node name="s-key" type="TouchScreenButton" parent="ui"]
-position = Vector2(-180, 87)
-scale = Vector2(0.25, 0.25)
-texture_normal = ExtResource("4_u665n")
+[node name="s-key" type="TextureRect" parent="ui"]
+offset_left = -181.0
+offset_top = 97.0
+offset_right = -168.0
+offset_bottom = 108.0
+texture = ExtResource("4_u665n")
 
-[node name="d-key" type="TouchScreenButton" parent="ui"]
-position = Vector2(-160, 87)
-scale = Vector2(0.25, 0.25)
-texture_normal = ExtResource("5_5j3aa")
+[node name="d-key" type="TextureRect" parent="ui"]
+offset_left = -166.0
+offset_top = 97.0
+offset_right = -153.0
+offset_bottom = 108.0
+texture = ExtResource("5_5j3aa")
 
-[node name="up-key" type="TouchScreenButton" parent="ui"]
-position = Vector2(155, 68)
-scale = Vector2(0.25, 0.25)
-texture_normal = ExtResource("6_3b43g")
+[node name="up-key" type="TextureRect" parent="ui"]
+offset_left = 168.0
+offset_top = 84.0
+offset_right = 181.0
+offset_bottom = 95.0
+texture = ExtResource("6_3b43g")
 
-[node name="left-key" type="TouchScreenButton" parent="ui"]
-position = Vector2(135, 87)
-scale = Vector2(0.25, 0.25)
-texture_normal = ExtResource("7_mtd0n")
+[node name="left-key" type="TextureRect" parent="ui"]
+offset_left = 153.0
+offset_top = 97.0
+offset_right = 166.0
+offset_bottom = 108.0
+texture = ExtResource("7_mtd0n")
 
-[node name="down-key" type="TouchScreenButton" parent="ui"]
-position = Vector2(155, 87)
-scale = Vector2(0.25, 0.25)
-texture_normal = ExtResource("8_rmpv0")
+[node name="down-key" type="TextureRect" parent="ui"]
+offset_left = 168.0
+offset_top = 97.0
+offset_right = 181.0
+offset_bottom = 108.0
+texture = ExtResource("8_rmpv0")
 
-[node name="right-key" type="TouchScreenButton" parent="ui"]
-position = Vector2(175, 87)
-scale = Vector2(0.25, 0.25)
-texture_normal = ExtResource("9_iy2iv")
+[node name="right-key" type="TextureRect" parent="ui"]
+offset_left = 183.0
+offset_top = 97.0
+offset_right = 196.0
+offset_bottom = 108.0
+texture = ExtResource("9_iy2iv")
 
-[node name="shift-key" type="TouchScreenButton" parent="ui"]
-position = Vector2(-231, 104)
-scale = Vector2(0.25, 0.25)
-texture_normal = ExtResource("10_x0e00")
+[node name="shift-key" type="TextureRect" parent="ui"]
+offset_left = -225.0
+offset_top = 109.0
+offset_right = -197.0
+offset_bottom = 120.0
+texture = ExtResource("10_x0e00")
 
-[node name="f11-key" type="TouchScreenButton" parent="ui"]
-position = Vector2(208, -128)
-scale = Vector2(0.25, 0.25)
-texture_normal = ExtResource("11_hohvs")
+[node name="f11-key" type="TextureRect" parent="ui"]
+offset_left = 212.0
+offset_top = -120.0
+offset_right = 225.0
+offset_bottom = -109.0
+texture = ExtResource("11_hohvs")
 
-[node name="esc-key" type="TouchScreenButton" parent="ui"]
-position = Vector2(-233, -129)
-scale = Vector2(0.25, 0.25)
-texture_normal = ExtResource("12_h7tk6")
+[node name="esc-key" type="TextureRect" parent="ui"]
+offset_left = -225.0
+offset_top = -120.0
+offset_right = -207.0
+offset_bottom = -109.0
+texture = ExtResource("12_h7tk6")
