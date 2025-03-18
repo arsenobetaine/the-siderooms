@@ -2,7 +2,6 @@ class_name Ruby
 extends Area2D
 
 signal collected
-
 var is_player_inside: bool = false
 
 func _ready():

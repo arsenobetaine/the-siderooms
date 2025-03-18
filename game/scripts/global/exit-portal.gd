@@ -6,9 +6,9 @@ extends Area2D
 @onready var glow_light = $"point-light"
 @export var glow_distance: float = 100.0
 @export var fade_duration: float = 0.25
-
 var is_glowing: bool = false
 var base_modulate: Color = Color(1.0, 1.0, 1.0, 1.0)
+var is_changing_scene: bool = false
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
@@ -20,7 +20,6 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if animated_sprite and not animated_sprite.is_playing():
 		animated_sprite.play("portal")
-	
 	var player = get_node_or_null("/root/level-one/player")
 	if player:
 		var distance = global_position.distance_to(player.global_position)
@@ -44,11 +43,14 @@ func stop_glow() -> void:
 		tween.parallel().tween_property(glow_light, "energy", 0.0, fade_duration)
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.name == "player":
+	if body.name == "player" and not is_changing_scene:
 		var player = body as Player
 		if player and "inventory" in player and player.inventory["rubies"] == 3:
-			call_deferred("_change_scene")
+			is_changing_scene = true
+			start_transition()
+
+func start_transition() -> void:
+	TransitionManager.start_transition(next_scene_path)
 
 func _change_scene() -> void:
-	get_tree().change_scene_to_file(next_scene_path)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)

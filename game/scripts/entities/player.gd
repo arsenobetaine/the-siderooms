@@ -8,7 +8,6 @@ extends CharacterBody2D
 @export var base_energy: float = 1.0
 @export var flicker_intensity: float = 0.5
 @export var flicker_speed: float = 4.0
-
 var stamina_regen_rate: float = max_stamina / cooldown_duration
 var current_stamina: float = max_stamina
 var cooldown_timer: float = 0.0
@@ -20,13 +19,10 @@ var target_energy: float = 1.0
 var flicker_timer: float = 0.0
 var flicker_interval: float = 0.0
 var inventory = { "rubies": 0 }
-
 const HIDE_DELAY: float = 0.5
-
 enum State {IDLE, WALKING}
 var last_direction: Vector2 = Vector2.DOWN
 var current_state: State = State.IDLE
-
 @onready var animation_player: AnimationPlayer = $"animated-sprite/animation-player"
 @onready var point_light: PointLight2D = $"point-light"
 @onready var sprint_indicator: ProgressBar = $"sprint-indicator"
@@ -46,16 +42,13 @@ func _physics_process(delta):
 	var input_vector: Vector2 = Vector2.ZERO
 	input_vector.x = Input.get_axis("A", "D")
 	input_vector.y = Input.get_axis("W", "S")
-	
 	if input_vector:
 		input_vector = input_vector.normalized()
 		last_direction = input_vector
-	
 	_handle_sprint(delta, input_vector)
 	var current_speed: float = speed * (speed_multiplier if is_sprinting else 1.0)
 	velocity = input_vector * current_speed
 	move_and_slide()
-	
 	current_state = State.IDLE
 	if input_vector:
 		var is_blocked: bool = false
@@ -66,7 +59,6 @@ func _physics_process(delta):
 				break
 		if not is_blocked and velocity.length() > 1.0:
 			current_state = State.WALKING
-	
 	_update_animation()
 	_update_light(delta)
 	sprint_indicator.value = (current_stamina / max_stamina) * 100.0
@@ -80,12 +72,10 @@ func _handle_sprint(delta, input_vector):
 			hide_delay_timer = HIDE_DELAY
 		if cooldown_timer <= 0:
 			cooldown_timer = 0.0
-	
 	if hide_delay_timer > 0:
 		hide_delay_timer -= delta
 		if hide_delay_timer <= 0:
 			sprint_indicator.visible = false
-	
 	if Input.is_key_pressed(KEY_SHIFT) and current_stamina > 0 and input_vector:
 		if current_stamina > delta:
 			is_sprinting = true
@@ -115,13 +105,10 @@ func _update_animation():
 		direction_string = "left"
 	elif last_direction.x > 0:
 		direction_string = "right"
-	
 	var state_string: String = "idle" if current_state == State.IDLE else "walk"
 	var animation_name: String = state_string + "_" + direction_string
-	
 	if animation_player.current_animation != animation_name:
 		animation_player.play(animation_name)
-	
 	if current_state == State.WALKING:
 		animation_player.speed_scale = speed_multiplier if is_sprinting else 1.0
 	else:
@@ -132,7 +119,6 @@ func _update_light(delta):
 	if flicker_timer <= 0:
 		target_energy = clamp(base_energy + randf_range(-flicker_intensity, flicker_intensity), 0.2, base_energy)
 		_set_next_flicker_interval()
-	
 	current_energy = lerp(current_energy, target_energy, 20.0 * delta)
 	point_light.energy = current_energy
 

@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=4 uid="uid://bjc7v3bxipwfr"]
+[gd_scene load_steps=10 format=4 uid="uid://bjc7v3bxipwfr"]
 
+[ext_resource type="Script" uid="uid://mq0bv0fadp7d" path="res://scripts/global/level-one.gd" id="1_1tya5"]
 [ext_resource type="PackedScene" uid="uid://hu68fs8f8nx5" path="res://scenes/levels/tile-map-layer.tscn" id="1_w72ii"]
 [ext_resource type="PackedScene" uid="uid://ckg76mq128fgd" path="res://scenes/entities/player.tscn" id="2_kc86w"]
 [ext_resource type="PackedScene" uid="uid://dwrnf3hvh5t83" path="res://scenes/levels/camera.tscn" id="3_7wpn1"]
@@ -10,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://waitu44pxvb4" path="res://scenes/levels/scene-tree.tscn" id="9_vfmll"]
 
 [node name="level-one" type="Node2D"]
+script = ExtResource("1_1tya5")
 
 [node name="scene-tree" parent="." instance=ExtResource("9_vfmll")]
 

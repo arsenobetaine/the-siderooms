@@ -3,7 +3,6 @@ extends Camera2D
 
 @export var follow_speed: float = 5.0
 @export var lookahead_distance: float = 100.0
-
 @onready var player = get_node("/root/level-one/player")
 @onready var ui: CanvasLayer = $ui
 @onready var w_key: TextureRect = $"ui/w-key"
@@ -25,7 +24,6 @@ extends Camera2D
 @onready var slot2: TextureRect = $"ui/inventory/slot-two"
 @onready var slot3: TextureRect = $"ui/inventory/slot-three"
 @onready var ruby_count_label: Label = $"ui/inventory/ruby-count"
-
 var ruby_texture: Texture2D = preload("res://assets/art/ruby.png")
 var pressed_color: Color = Color(0.8, 0.8, 0.8, 1)
 
@@ -40,7 +38,6 @@ func _ready():
 func _process(delta):
 	var target_position = player.position
 	var lookahead_vector = Vector2.ZERO
-	
 	if Input.is_action_pressed("ui_right"):
 		lookahead_vector.x += 1
 		right_key.modulate = pressed_color
@@ -61,7 +58,6 @@ func _process(delta):
 		up_key.modulate = pressed_color
 	else:
 		up_key.modulate = Color.WHITE
-	
 	if Input.is_key_pressed(KEY_W):
 		w_key.modulate = pressed_color
 	else:
@@ -100,14 +96,11 @@ func _process(delta):
 		q_key.modulate = pressed_color
 	else:
 		q_key.modulate = Color.WHITE
-	
 	if inventory.visible:
 		update_inventory()
-	
 	if lookahead_vector:
 		lookahead_vector = lookahead_vector.normalized()
 		target_position += lookahead_vector * lookahead_distance
-	
 	var lerp_factor = 1.0 - exp(-follow_speed * delta)
 	position = position.lerp(target_position, lerp_factor)
 	if ui:

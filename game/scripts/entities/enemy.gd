@@ -5,12 +5,10 @@ extends CharacterBody2D
 @export var wander_speed: float = 20.0
 @export var chase_speed: float = 50.0
 @export var detection_range: float = 100.0
-
 @onready var player: Node2D = get_node("/root/level-one/player")
 @onready var touch_area: Area2D = $"touch-area"
 @onready var wait_timer: Timer = $"wait-timer"
 @onready var start_position: Vector2 = global_position
-
 enum State { WANDERING, CHASING, WAITING }
 var current_state: State = State.WANDERING
 var target_position: Vector2 = Vector2.ZERO
@@ -27,14 +25,12 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	var to_player = player.global_position - global_position
 	var distance_to_player = to_player.length()
-
 	if distance_to_player < detection_range:
 		current_state = State.CHASING
 	elif distance_to_player > detection_range * 1.5:
 		if current_state == State.CHASING:
 			current_state = State.WANDERING
 			_set_random_target()
-
 	match current_state:
 		State.WANDERING:
 			if global_position.distance_to(target_position) < 10.0:
@@ -45,7 +41,6 @@ func _physics_process(_delta: float) -> void:
 			velocity = to_player.normalized() * chase_speed
 		State.WAITING:
 			velocity = Vector2.ZERO
-
 	move_and_slide()
 
 func _set_random_target() -> void:

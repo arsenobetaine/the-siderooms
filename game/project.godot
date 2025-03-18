@@ -12,12 +12,16 @@ config_version=5
 
 config/name="The Siderooms"
 config/description="A game about The Siderooms."
-config/version="0.28"
+config/version="0.88"
 run/main_scene="uid://3ksm7d0pb7w7"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://assets/icons/icon.svg"
 config/macos_native_icon="res://assets/icons/icon.icns"
 config/windows_native_icon="res://assets/icons/icon.ico"
+
+[autoload]
+
+TransitionManager="*res://scenes/levels/fade-transition.tscn"
 
 [display]
 
