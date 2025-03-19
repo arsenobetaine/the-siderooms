@@ -1,4 +1,4 @@
-class_name ExitPortal
+class_name ExitPortalOne
 extends Area2D
 
 @export var next_scene_path: String = "res://scenes/levels/title-screen.tscn"
@@ -20,7 +20,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if animated_sprite and not animated_sprite.is_playing():
 		animated_sprite.play("portal")
-	var player = get_node_or_null("/root/level-one/player")
+	var player = get_node_or_null("/root/level-one/entities/player")
 	if player:
 		var distance = global_position.distance_to(player.global_position)
 		if distance <= glow_distance and not is_glowing:
@@ -46,6 +46,7 @@ func _on_body_entered(body: Node2D) -> void:
 	if body.name == "player" and not is_changing_scene:
 		var player = body as Player
 		if player and "inventory" in player and player.inventory["rubies"] == 3:
+			player.inventory["rubies"] = 0
 			is_changing_scene = true
 			start_transition()
 

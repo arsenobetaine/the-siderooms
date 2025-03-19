@@ -1,3 +1,4 @@
+class_name FadeTransition
 extends CanvasLayer
 
 @onready var animation_player = $"animation-player"

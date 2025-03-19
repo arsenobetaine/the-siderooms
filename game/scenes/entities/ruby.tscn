@@ -8,6 +8,7 @@ radius = 5.0
 height = 14.0
 
 [node name="ruby" type="Area2D"]
+collision_layer = 2
 script = ExtResource("1_p2suj")
 
 [node name="sprite" type="Sprite2D" parent="."]
@@ -18,11 +19,4 @@ texture = ExtResource("2_agpgk")
 position = Vector2(0.03, -0.005)
 rotation = 0.785398
 scale = Vector2(1.05, 1.05)
-shape = SubResource("CapsuleShape2D_xx8mc")
-
-[node name="static-body" type="StaticBody2D" parent="."]
-
-[node name="collision-shape" type="CollisionShape2D" parent="static-body"]
-position = Vector2(0.03, -0.005)
-rotation = 0.785398
 shape = SubResource("CapsuleShape2D_xx8mc")

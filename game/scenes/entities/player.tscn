@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://ckg76mq128fgd"]
+[gd_scene load_steps=52 format=3 uid="uid://ckg76mq128fgd"]
 
 [ext_resource type="Script" uid="uid://dm06dc17qu5vo" path="res://scripts/entities/player.gd" id="1_08t41"]
 [ext_resource type="Texture2D" uid="uid://dhp5xcxng3e6f" path="res://assets/art/player-sprites.png" id="2_1ie0h"]
@@ -409,9 +409,13 @@ corner_radius_top_right = 32
 corner_radius_bottom_right = 32
 corner_radius_bottom_left = 32
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1ie0h"]
+radius = 8.0
+height = 22.0
+
 [node name="player" type="CharacterBody2D"]
 collision_layer = 257
-collision_mask = 257
+collision_mask = 265
 script = ExtResource("1_08t41")
 
 [node name="animated-sprite" type="AnimatedSprite2D" parent="."]
@@ -448,3 +452,12 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_42nxq")
 step = 0.0
 rounded = true
 show_percentage = false
+
+[node name="area" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="collision-shape" type="CollisionShape2D" parent="area"]
+shape = SubResource("CapsuleShape2D_1ie0h")
+
+[node name="ray-cast" type="RayCast2D" parent="."]
+collision_mask = 8
