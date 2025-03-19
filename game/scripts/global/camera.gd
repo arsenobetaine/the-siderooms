@@ -103,6 +103,11 @@ func _process(delta):
 	if inventory.visible:
 		update_inventory()
 	
+	# Apply lookahead vector to target position
+	if lookahead_vector != Vector2.ZERO:
+		lookahead_vector = lookahead_vector.normalized()
+		target_position += lookahead_vector * lookahead_distance
+	
 	var lerp_factor = 1.0 - exp(-follow_speed * delta)
 	position = position.lerp(target_position, lerp_factor)
 	if ui:

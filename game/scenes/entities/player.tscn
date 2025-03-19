@@ -390,7 +390,7 @@ _data = {
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0n8oc"]
 radius = 9.47368
-height = 31.0
+height = 29.0
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1ie0h"]
 light_mode = 1
