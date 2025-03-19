@@ -441,6 +441,7 @@ texture = ExtResource("3_1ie0h")
 texture_scale = 0.16
 
 [node name="sprint-indicator" type="ProgressBar" parent="."]
+visible = false
 material = SubResource("CanvasItemMaterial_1ie0h")
 offset_left = -8.0
 offset_top = -22.0

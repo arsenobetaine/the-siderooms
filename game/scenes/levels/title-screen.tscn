@@ -1,41 +1,19 @@
-[gd_scene load_steps=9 format=3 uid="uid://3ksm7d0pb7w7"]
+[gd_scene load_steps=13 format=3 uid="uid://3ksm7d0pb7w7"]
 
 [ext_resource type="Script" uid="uid://6p1ql1rv6dlc" path="res://scripts/ui/title-screen.gd" id="1_pi6am"]
 [ext_resource type="PackedScene" uid="uid://bdem6pkqjpo87" path="res://scenes/ui/key-bindings.tscn" id="2_idxme"]
-[ext_resource type="Texture2D" uid="uid://cerfa7ivd83t8" path="res://assets/art/title-menu-background.png" id="2_ugbs4"]
+[ext_resource type="Texture2D" uid="uid://brspnxpiedrg4" path="res://assets/art/title-screen.png" id="4_8uti0"]
+[ext_resource type="PackedScene" uid="uid://bd40hfhm1ms1l" path="res://scenes/levels/title-screen-level.tscn" id="4_idxme"]
+[ext_resource type="Texture2D" uid="uid://dtpts1yn22bv2" path="res://assets/keys/play-button.png" id="5_i3lme"]
+[ext_resource type="Texture2D" uid="uid://c57bd3vsap4uw" path="res://assets/keys/play-button-hovered.png" id="6_i3lme"]
+[ext_resource type="Texture2D" uid="uid://dtyq460gl8q0c" path="res://assets/keys/q-key.png" id="6_mohi6"]
+[ext_resource type="Texture2D" uid="uid://h3xk0kdxrunf" path="res://assets/keys/website-button.png" id="7_fm2lv"]
+[ext_resource type="Texture2D" uid="uid://ucswo5s818gm" path="res://assets/keys/website-button-hovered.png" id="8_01hdg"]
+[ext_resource type="Texture2D" uid="uid://c6y2jnyn5tcrv" path="res://assets/keys/f11-button.png" id="10_01hdg"]
+[ext_resource type="Texture2D" uid="uid://db3glf5mccaw3" path="res://assets/keys/f11-button-hovered.png" id="11_2ihdu"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jyisb"]
-texture = ExtResource("2_ugbs4")
-modulate_color = Color(0.270222, 0.270222, 0.270222, 1)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jyisb"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_owfie"]
-bg_color = Color(0.817521, 0.817521, 0.817521, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-shadow_color = Color(0.129558, 0.129558, 0.129558, 0.6)
-shadow_offset = Vector2(0, 2.28)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_efdfl"]
-bg_color = Color(0.650128, 0.650128, 0.650128, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-shadow_color = Color(0.129558, 0.129558, 0.129558, 0.6)
-shadow_offset = Vector2(0, 2.28)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jyisb"]
-bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-shadow_color = Color(0.129558, 0.129558, 0.129558, 0.6)
-shadow_offset = Vector2(0, 2.28)
+texture = ExtResource("4_8uti0")
 
 [node name="title-screen" type="Control"]
 layout_mode = 3
@@ -46,8 +24,13 @@ script = ExtResource("1_pi6am")
 
 [node name="key-bindings" parent="." instance=ExtResource("2_idxme")]
 
-[node name="background" type="Panel" parent="."]
-layout_mode = 1
+[node name="title-screen-level" parent="." instance=ExtResource("4_idxme")]
+position = Vector2(960, 540)
+scale = Vector2(4, 4)
+
+[node name="canvas-layer" type="CanvasLayer" parent="."]
+
+[node name="title" type="Panel" parent="canvas-layer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -55,111 +38,76 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_jyisb")
 
-[node name="buttons" type="VBoxContainer" parent="."]
-layout_mode = 1
+[node name="play-button" type="TextureButton" parent="canvas-layer"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -132.5
-offset_top = 18.0
-offset_right = 132.5
-offset_bottom = 153.0
+offset_left = 80.0
+offset_top = -64.0
+offset_right = 144.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 10
+size_flags_horizontal = 4
+size_flags_vertical = 6
+texture_normal = ExtResource("5_i3lme")
+texture_pressed = ExtResource("6_i3lme")
+texture_hover = ExtResource("6_i3lme")
+stretch_mode = 5
 
-[node name="play-button" type="Button" parent="buttons"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 30
-theme_override_styles/focus = SubResource("StyleBoxEmpty_jyisb")
-theme_override_styles/hover = SubResource("StyleBoxFlat_owfie")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_efdfl")
-theme_override_styles/normal = SubResource("StyleBoxFlat_jyisb")
-text = "Play"
-
-[node name="quit-button" type="Button" parent="buttons"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 30
-theme_override_styles/focus = SubResource("StyleBoxEmpty_jyisb")
-theme_override_styles/hover = SubResource("StyleBoxFlat_owfie")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_efdfl")
-theme_override_styles/normal = SubResource("StyleBoxFlat_jyisb")
-text = "Quit"
-
-[node name="top-right" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -75.0
-offset_bottom = 71.0
-grow_horizontal = 0
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="side-buttons" type="VBoxContainer" parent="top-right"]
-layout_mode = 2
-
-[node name="fullscreen-button" type="Button" parent="top-right/side-buttons"]
-layout_mode = 2
-text = "F11"
-
-[node name="bottom-right" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -111.0
-offset_top = -71.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="side-buttons" type="VBoxContainer" parent="bottom-right"]
-layout_mode = 2
-
-[node name="website-button" type="Button" parent="bottom-right/side-buttons"]
-layout_mode = 2
-text = "Website"
-
-[node name="title" type="Label" parent="."]
-layout_mode = 1
+[node name="website-button" type="TextureButton" parent="canvas-layer"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -215.0
-offset_top = -134.0
-offset_right = 215.0
-offset_bottom = -51.0
+offset_left = 80.0
+offset_right = 144.0
+offset_bottom = 64.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 60
-text = "The Siderooms"
-horizontal_alignment = 1
-vertical_alignment = 1
+size_flags_horizontal = 4
+size_flags_vertical = 6
+texture_normal = ExtResource("7_fm2lv")
+texture_pressed = ExtResource("8_01hdg")
+texture_hover = ExtResource("8_01hdg")
+stretch_mode = 5
 
-[connection signal="pressed" from="buttons/play-button" to="." method="_handle_play"]
-[connection signal="pressed" from="buttons/quit-button" to="." method="_handle_quit"]
-[connection signal="pressed" from="top-right/side-buttons/fullscreen-button" to="." method="_handle_fullscreen"]
-[connection signal="pressed" from="bottom-right/side-buttons/website-button" to="." method="_handle_website"]
+[node name="quit-button" type="TextureButton" parent="canvas-layer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.0
+offset_top = -64.0
+offset_right = -80.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+texture_normal = ExtResource("6_mohi6")
+stretch_mode = 5
+
+[node name="fullscreen-button" type="TextureButton" parent="canvas-layer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.0
+offset_right = -80.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+texture_normal = ExtResource("10_01hdg")
+texture_pressed = ExtResource("11_2ihdu")
+texture_hover = ExtResource("11_2ihdu")
+stretch_mode = 5
+
+[connection signal="pressed" from="canvas-layer/play-button" to="." method="_handle_play"]
+[connection signal="pressed" from="canvas-layer/website-button" to="." method="_handle_website"]
+[connection signal="pressed" from="canvas-layer/quit-button" to="." method="_handle_quit"]
+[connection signal="pressed" from="canvas-layer/fullscreen-button" to="." method="_handle_fullscreen"]

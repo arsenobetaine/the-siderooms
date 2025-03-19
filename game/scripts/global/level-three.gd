@@ -1,4 +1,4 @@
-class_name LevelOne
+class_name LevelThree
 extends Node2D
 
 @onready var escape_menu = $"escape-menu"

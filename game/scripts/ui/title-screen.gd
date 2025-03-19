@@ -1,10 +1,10 @@
 class_name TitleScreen
 extends Control
 
-@onready var play_button = $"buttons/play-button"
-@onready var quit_button = $"buttons/quit-button"
-@onready var fullscreen_button = $"top-right/side-buttons/fullscreen-button"
-@onready var website_button = $"bottom-right/side-buttons/website-button"
+@onready var play_button = $"canvas-layer/play-button"
+@onready var quit_button = $"canvas-layer/quit-button"
+@onready var fullscreen_button = $"canvas-layer/fullscreen-button"
+@onready var website_button = $"canvas-layer/website-button"
 var scene_tree: SceneTree
 
 func _ready() -> void:
@@ -21,7 +21,7 @@ func _handle_play() -> void:
 	call_deferred("_deferred_change_scene")
 
 func _deferred_change_scene() -> void:
-	start_transition()
+	TransitionManager.start_transition("res://scenes/ui/transition-level.tscn")
 
 func _handle_quit() -> void:
 	if OS.get_name() == "HTML5":
@@ -37,9 +37,6 @@ func _handle_fullscreen() -> void:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-
-func start_transition() -> void:
-	TransitionManager.start_transition("res://scenes/levels/level-one.tscn")
 
 func _handle_website() -> void:
 	OS.shell_open("https://the-siderooms.arsenobetaine.dev")
