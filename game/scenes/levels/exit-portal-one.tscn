@@ -30,7 +30,7 @@ animations = [{
 radius = 3.0
 height = 16.0
 
-[node name="exit-portal" type="Area2D"]
+[node name="exit-portal-one" type="Area2D"]
 script = ExtResource("1_cohyv")
 
 [node name="animated-sprite" type="AnimatedSprite2D" parent="."]

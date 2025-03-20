@@ -22,6 +22,7 @@ config/windows_native_icon="res://assets/icons/icon.ico"
 [autoload]
 
 TransitionManager="*res://scenes/levels/fade-transition.tscn"
+AudioManager="*res://scenes/ui/audio-manager.tscn"
 
 [display]
 

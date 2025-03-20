@@ -1,14 +1,16 @@
-[gd_scene load_steps=12 format=3 uid="uid://61mspnskruyj"]
+[gd_scene load_steps=14 format=3 uid="uid://61mspnskruyj"]
 
 [ext_resource type="Script" uid="uid://blpcsjk1yxklj" path="res://scripts/ui/escape-menu.gd" id="1_bwesl"]
 [ext_resource type="Texture2D" uid="uid://brspnxpiedrg4" path="res://assets/art/title-screen.png" id="2_bwesl"]
 [ext_resource type="PackedScene" uid="uid://bdem6pkqjpo87" path="res://scenes/ui/key-bindings.tscn" id="3_df16q"]
 [ext_resource type="Texture2D" uid="uid://dtpts1yn22bv2" path="res://assets/keys/play-button.png" id="4_6nl1o"]
 [ext_resource type="Texture2D" uid="uid://c57bd3vsap4uw" path="res://assets/keys/play-button-hovered.png" id="5_0uf88"]
-[ext_resource type="Texture2D" uid="uid://h3xk0kdxrunf" path="res://assets/keys/website-button.png" id="6_v1bqs"]
-[ext_resource type="Texture2D" uid="uid://ucswo5s818gm" path="res://assets/keys/website-button-hovered.png" id="7_4322r"]
-[ext_resource type="Texture2D" uid="uid://dtyq460gl8q0c" path="res://assets/keys/q-key.png" id="8_1bhyt"]
+[ext_resource type="Texture2D" uid="uid://dvwur2b1ry6cn" path="res://assets/keys/audio-button.png" id="6_0uf88"]
+[ext_resource type="Texture2D" uid="uid://dcq6dk2yx0icj" path="res://assets/keys/audio-button-hovered.png" id="7_v1bqs"]
+[ext_resource type="Texture2D" uid="uid://c0nv83imib78v" path="res://assets/keys/audio-button-disabled-hovered.png" id="8_v1bqs"]
 [ext_resource type="Texture2D" uid="uid://c6y2jnyn5tcrv" path="res://assets/keys/f11-button.png" id="9_p687j"]
+[ext_resource type="Texture2D" uid="uid://crhp1m2uty7xf" path="res://assets/keys/end-button.png" id="9_v1bqs"]
+[ext_resource type="Texture2D" uid="uid://d3by4ho5el821" path="res://assets/keys/end-button-hovered.png" id="10_4322r"]
 [ext_resource type="Texture2D" uid="uid://db3glf5mccaw3" path="res://assets/keys/f11-button-hovered.png" id="10_vys4b"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_82lpe"]
@@ -49,29 +51,10 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 texture_normal = ExtResource("4_6nl1o")
-texture_pressed = ExtResource("5_0uf88")
 texture_hover = ExtResource("5_0uf88")
 stretch_mode = 5
 
-[node name="website-button" type="TextureButton" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 80.0
-offset_right = 144.0
-offset_bottom = 64.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
-texture_normal = ExtResource("6_v1bqs")
-texture_pressed = ExtResource("7_4322r")
-texture_hover = ExtResource("7_4322r")
-stretch_mode = 5
-
-[node name="quit-button" type="TextureButton" parent="."]
+[node name="audio-button" type="TextureButton" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -82,8 +65,27 @@ offset_top = -64.0
 offset_right = -80.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+texture_normal = ExtResource("6_0uf88")
+texture_hover = ExtResource("7_v1bqs")
+texture_disabled = ExtResource("8_v1bqs")
+stretch_mode = 5
+
+[node name="quit-button" type="TextureButton" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 80.0
+offset_right = 144.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 3
-texture_normal = ExtResource("8_1bhyt")
+texture_normal = ExtResource("9_v1bqs")
+texture_hover = ExtResource("10_4322r")
 stretch_mode = 5
 
 [node name="fullscreen-button" type="TextureButton" parent="."]
@@ -100,6 +102,5 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 texture_normal = ExtResource("9_p687j")
-texture_pressed = ExtResource("10_vys4b")
 texture_hover = ExtResource("10_vys4b")
 stretch_mode = 5

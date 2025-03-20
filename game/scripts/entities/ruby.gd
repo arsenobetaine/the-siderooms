@@ -15,11 +15,11 @@ func _ready() -> void:
 	visible = true
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
+	add_to_group("rubies")
 
 func _process(delta: float) -> void:
 	time += delta * float_speed
-	var offset = sin(time) * float_amplitude
-	global_position = Vector2(global_position.x, start_y + offset)
+	global_position.y = start_y + sin(time) * float_amplitude
 
 func try_collect(player: Player) -> bool:
 	if is_player_inside:

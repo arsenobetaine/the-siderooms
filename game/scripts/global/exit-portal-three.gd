@@ -23,10 +23,15 @@ func _process(_delta: float) -> void:
 	var player = get_node_or_null("/root/level-one/entities/player")
 	if player:
 		var distance = global_position.distance_to(player.global_position)
-		if distance <= glow_distance and not is_glowing:
-			start_glow()
-		elif distance > glow_distance and is_glowing:
-			stop_glow()
+		if distance <= glow_distance != is_glowing:
+			if is_glowing:
+				stop_glow()
+			else:
+				start_glow()
+		var total_rubies = get_tree().get_nodes_in_group("rubies").size() + (player.inventory["rubies"] if "inventory" in player else 0)
+		if total_rubies < 5 and not is_changing_scene:
+			is_changing_scene = true
+			TransitionManager.start_transition("res://scenes/levels/level-three.tscn")
 
 func start_glow() -> void:
 	is_glowing = true
@@ -45,7 +50,7 @@ func stop_glow() -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body.name == "player" and not is_changing_scene:
 		var player = body as Player
-		if player and "inventory" in player and player.inventory["rubies"] == 3:
+		if player and "inventory" in player and player.inventory["rubies"] == 5:
 			player.inventory["rubies"] = 0
 			is_changing_scene = true
 			start_transition()

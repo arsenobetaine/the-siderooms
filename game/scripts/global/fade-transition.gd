@@ -7,7 +7,7 @@ func _ready() -> void:
 	if color_rect:
 		color_rect.visible = false
 		color_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	layer = 10
+	layer = 1000
 
 func start_transition(next_scene_path: String) -> void:
 	if color_rect and animation_player:
