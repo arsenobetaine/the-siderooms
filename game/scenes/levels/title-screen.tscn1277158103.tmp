@@ -1,0 +1,113 @@
+[gd_scene load_steps=14 format=3 uid="uid://3ksm7d0pb7w7"]
+
+[ext_resource type="Script" uid="uid://6p1ql1rv6dlc" path="res://scripts/ui/title-screen.gd" id="1_pi6am"]
+[ext_resource type="PackedScene" uid="uid://bdem6pkqjpo87" path="res://scenes/ui/key-bindings.tscn" id="2_idxme"]
+[ext_resource type="Texture2D" uid="uid://brspnxpiedrg4" path="res://assets/art/title-screen.png" id="4_8uti0"]
+[ext_resource type="PackedScene" uid="uid://bd40hfhm1ms1l" path="res://scenes/levels/title-screen-level.tscn" id="4_idxme"]
+[ext_resource type="Texture2D" uid="uid://dtpts1yn22bv2" path="res://assets/graphics/ui/buttons/play.png" id="5_i3lme"]
+[ext_resource type="Texture2D" uid="uid://c57bd3vsap4uw" path="res://assets/graphics/ui/buttons/button_play_hovered.png" id="6_i3lme"]
+[ext_resource type="Texture2D" uid="uid://h3xk0kdxrunf" path="res://assets/graphics/ui/buttons/button_website.png" id="7_fm2lv"]
+[ext_resource type="Texture2D" uid="uid://ucswo5s818gm" path="res://assets/graphics/ui/buttons/button_website_hovered.png" id="8_01hdg"]
+[ext_resource type="Texture2D" uid="uid://dvwur2b1ry6cn" path="res://assets/graphics/ui/buttons/audio.png" id="9_l7r3j"]
+[ext_resource type="Texture2D" uid="uid://c6y2jnyn5tcrv" path="res://assets/graphics/ui/buttons/fullscreen.png" id="10_01hdg"]
+[ext_resource type="Texture2D" uid="uid://dcq6dk2yx0icj" path="res://assets/graphics/ui/buttons/audio_hovered.png" id="10_rdk5c"]
+[ext_resource type="Texture2D" uid="uid://db3glf5mccaw3" path="res://assets/graphics/ui/buttons/fullscreen_hovered.png" id="11_2ihdu"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jyisb"]
+texture = ExtResource("4_8uti0")
+
+[node name="title-screen" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+script = ExtResource("1_pi6am")
+
+[node name="key-bindings" parent="." instance=ExtResource("2_idxme")]
+
+[node name="title-screen-level" parent="." instance=ExtResource("4_idxme")]
+position = Vector2(960, 540)
+scale = Vector2(4, 4)
+
+[node name="canvas-layer" type="CanvasLayer" parent="."]
+
+[node name="title" type="Panel" parent="canvas-layer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_jyisb")
+
+[node name="play-button" type="TextureButton" parent="canvas-layer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 80.0
+offset_top = -64.0
+offset_right = 144.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+texture_normal = ExtResource("5_i3lme")
+texture_hover = ExtResource("6_i3lme")
+stretch_mode = 5
+
+[node name="website-button" type="TextureButton" parent="canvas-layer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 80.0
+offset_right = 144.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+texture_normal = ExtResource("7_fm2lv")
+texture_hover = ExtResource("8_01hdg")
+stretch_mode = 5
+
+[node name="audio-button" type="TextureButton" parent="canvas-layer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.0
+offset_top = -64.0
+offset_right = -80.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+texture_normal = ExtResource("9_l7r3j")
+texture_hover = ExtResource("10_rdk5c")
+stretch_mode = 5
+
+[node name="fullscreen-button" type="TextureButton" parent="canvas-layer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.0
+offset_right = -80.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+texture_normal = ExtResource("10_01hdg")
+texture_hover = ExtResource("11_2ihdu")
+stretch_mode = 5
+
+[connection signal="pressed" from="canvas-layer/play-button" to="." method="_handle_play"]
+[connection signal="pressed" from="canvas-layer/website-button" to="." method="_handle_website"]
+[connection signal="toggled" from="canvas-layer/audio-button" to="." method="_handle_audio"]
+[connection signal="pressed" from="canvas-layer/fullscreen-button" to="." method="_handle_fullscreen"]

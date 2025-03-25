@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdem6pkqjpo87"]
+
+[ext_resource type="Script" uid="uid://bljxogrijhpun" path="res://scripts/utilities/key_bindings.gd" id="1_ltqft"]
+
+[node name="KeyBindings" type="Node2D"]
+script = ExtResource("1_ltqft")

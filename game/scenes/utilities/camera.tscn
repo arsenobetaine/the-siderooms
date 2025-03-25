@@ -1,0 +1,172 @@
+[gd_scene load_steps=17 format=3 uid="uid://dwrnf3hvh5t83"]
+
+[ext_resource type="Script" uid="uid://cb2x0b18vipsn" path="res://scripts/utilities/camera.gd" id="1_rtr5j"]
+[ext_resource type="Texture2D" uid="uid://djn25dpyn8cj2" path="res://assets/graphics/ui/backgrounds/inventory.png" id="2_3b43g"]
+[ext_resource type="Texture2D" uid="uid://bswfmhe24d77y" path="res://assets/graphics/ui/keys/w.png" id="2_4aa83"]
+[ext_resource type="Texture2D" uid="uid://dtyq460gl8q0c" path="res://assets/graphics/ui/keys/q.png" id="2_5j3aa"]
+[ext_resource type="Texture2D" uid="uid://c7bdi8yquybsx" path="res://assets/graphics/ui/keys/a.png" id="3_a6l8m"]
+[ext_resource type="Texture2D" uid="uid://b2hwebaug4tbw" path="res://assets/graphics/ui/keys/e.png" id="4_3b43g"]
+[ext_resource type="Texture2D" uid="uid://wp5nm5x43yq1" path="res://assets/graphics/ui/keys/s.png" id="4_u665n"]
+[ext_resource type="Texture2D" uid="uid://ci7v03goblxy1" path="res://assets/graphics/ui/keys/d.png" id="5_5j3aa"]
+[ext_resource type="Texture2D" uid="uid://b8wyuwaqf03ct" path="res://assets/graphics/ui/keys/up.png" id="6_3b43g"]
+[ext_resource type="Texture2D" uid="uid://cg585557u4v7w" path="res://assets/graphics/ui/keys/left.png" id="7_mtd0n"]
+[ext_resource type="Texture2D" uid="uid://e11pd3bu6sfn" path="res://assets/graphics/ui/keys/down.png" id="8_rmpv0"]
+[ext_resource type="Texture2D" uid="uid://3djcl13wteeh" path="res://assets/graphics/ui/keys/v.png" id="9_awq75"]
+[ext_resource type="Texture2D" uid="uid://cgk13s32hr8mu" path="res://assets/graphics/ui/keys/right.png" id="9_iy2iv"]
+[ext_resource type="Texture2D" uid="uid://c34f2rcbr5ph" path="res://assets/graphics/ui/keys/shift.png" id="10_x0e00"]
+[ext_resource type="Texture2D" uid="uid://crgqet82a1tye" path="res://assets/graphics/ui/keys/f11.png" id="11_hohvs"]
+[ext_resource type="Texture2D" uid="uid://cxb6k0ynxnvxs" path="res://assets/graphics/ui/keys/esc.png" id="12_h7tk6"]
+
+[node name="Camera" type="Camera2D"]
+zoom = Vector2(4, 4)
+script = ExtResource("1_rtr5j")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.15, 0.15, 0.15, 1)
+
+[node name="UI" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="Inventory" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -18.0
+offset_top = 69.0
+offset_right = 22.0
+offset_bottom = 109.0
+
+[node name="Background" type="TextureRect" parent="UI/Inventory"]
+layout_mode = 0
+offset_left = -11.0
+offset_top = 15.0
+offset_right = 47.0
+offset_bottom = 39.0
+texture = ExtResource("2_3b43g")
+
+[node name="SlotOne" type="TextureRect" parent="UI/Inventory"]
+layout_mode = 0
+offset_left = -6.0
+offset_top = 20.0
+offset_right = 21.0
+offset_bottom = 47.0
+scale = Vector2(0.52, 0.52)
+
+[node name="SlotTwo" type="TextureRect" parent="UI/Inventory"]
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+
+[node name="SlotThree" type="TextureRect" parent="UI/Inventory"]
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+
+[node name="RubyCount" type="Label" parent="UI/Inventory"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 29.0
+offset_right = 63.0
+offset_bottom = 166.0
+scale = Vector2(0.04, 0.04)
+theme_override_colors/font_color = Color(0.737255, 0.796078, 0.768627, 1)
+theme_override_font_sizes/font_size = 100
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="KeyQ" type="TextureButton" parent="UI"]
+offset_left = -195.0
+offset_top = 83.0
+offset_right = -182.0
+offset_bottom = 94.0
+texture_normal = ExtResource("2_5j3aa")
+
+[node name="KeyW" type="TextureButton" parent="UI"]
+offset_left = -180.0
+offset_top = 83.0
+offset_right = -167.0
+offset_bottom = 94.0
+texture_normal = ExtResource("2_4aa83")
+
+[node name="KeyE" type="TextureButton" parent="UI"]
+offset_left = -165.0
+offset_top = 83.0
+offset_right = -152.0
+offset_bottom = 94.0
+texture_normal = ExtResource("4_3b43g")
+
+[node name="KeyA" type="TextureButton" parent="UI"]
+offset_left = -195.0
+offset_top = 96.0
+offset_right = -182.0
+offset_bottom = 107.0
+texture_normal = ExtResource("3_a6l8m")
+
+[node name="KeyS" type="TextureButton" parent="UI"]
+offset_left = -180.0
+offset_top = 96.0
+offset_right = -167.0
+offset_bottom = 107.0
+texture_normal = ExtResource("4_u665n")
+
+[node name="KeyD" type="TextureButton" parent="UI"]
+offset_left = -165.0
+offset_top = 96.0
+offset_right = -152.0
+offset_bottom = 107.0
+texture_normal = ExtResource("5_5j3aa")
+
+[node name="KeyV" type="TextureButton" parent="UI"]
+offset_left = -150.0
+offset_top = 109.0
+offset_right = -137.0
+offset_bottom = 120.0
+texture_normal = ExtResource("9_awq75")
+
+[node name="KeyUp" type="TextureButton" parent="UI"]
+offset_left = 167.0
+offset_top = 83.0
+offset_right = 180.0
+offset_bottom = 94.0
+texture_normal = ExtResource("6_3b43g")
+
+[node name="KeyLeft" type="TextureButton" parent="UI"]
+offset_left = 152.0
+offset_top = 96.0
+offset_right = 165.0
+offset_bottom = 107.0
+texture_normal = ExtResource("7_mtd0n")
+
+[node name="KeyDown" type="TextureButton" parent="UI"]
+offset_left = 167.0
+offset_top = 96.0
+offset_right = 180.0
+offset_bottom = 107.0
+texture_normal = ExtResource("8_rmpv0")
+
+[node name="KeyRight" type="TextureButton" parent="UI"]
+offset_left = 182.0
+offset_top = 96.0
+offset_right = 195.0
+offset_bottom = 107.0
+texture_normal = ExtResource("9_iy2iv")
+
+[node name="KeyShift" type="TextureButton" parent="UI"]
+offset_left = -225.0
+offset_top = 109.0
+offset_right = -197.0
+offset_bottom = 120.0
+texture_normal = ExtResource("10_x0e00")
+
+[node name="KeyF11" type="TextureButton" parent="UI"]
+offset_left = 212.0
+offset_top = -120.0
+offset_right = 225.0
+offset_bottom = -109.0
+texture_normal = ExtResource("11_hohvs")
+
+[node name="KeyEsc" type="TextureButton" parent="UI"]
+offset_left = -225.0
+offset_top = -120.0
+offset_right = -207.0
+offset_bottom = -109.0
+texture_normal = ExtResource("12_h7tk6")

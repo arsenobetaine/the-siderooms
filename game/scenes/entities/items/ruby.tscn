@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxjtsc3xrwiqg"]
+
+[ext_resource type="Script" uid="uid://bl267iyhlomgg" path="res://scripts/entities/items/ruby.gd" id="1_agpgk"]
+[ext_resource type="Texture2D" uid="uid://bvd17cd8ajs8c" path="res://assets/graphics/entities/items/ruby.png" id="2_cr7iv"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xx8mc"]
+radius = 5.0
+height = 14.0
+
+[node name="Ruby" type="Area2D"]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_agpgk")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_cr7iv")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(0.03, -0.005)
+rotation = 0.785398
+scale = Vector2(1.05, 1.05)
+shape = SubResource("CapsuleShape2D_xx8mc")

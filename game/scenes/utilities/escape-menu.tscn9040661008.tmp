@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://61mspnskruyj"]
+
+[ext_resource type="Script" uid="uid://blpcsjk1yxklj" path="res://scripts/ui/escape-menu.gd" id="1_bwesl"]
+[ext_resource type="Shader" uid="uid://cbn71sjnymtmi" path="res://assets/shaders/blur-shader.gdshader" id="1_vro4h"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bwesl"]
+shader = ExtResource("1_vro4h")
+shader_parameter/blur_amount = 2.0
+
+[node name="escape-menu" type="CanvasLayer"]
+script = ExtResource("1_bwesl")
+
+[node name="background" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_bwesl")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.1)
+
+[node name="menu-container" type="Control" parent="background"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="crack" type="Button" parent="background/menu-container"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "crack"
