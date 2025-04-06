@@ -71,7 +71,10 @@ func _on_body_entered(body: Node2D) -> void:
 			if player.inventory["rubies"] == 5:
 				player.inventory["rubies"] = 0
 				is_changing_scene = true
-				TransitionManager.start_transition(get_next_scene_path())
+				var next_scene_path = get_next_scene_path()
+				if portal_type == PortalType.LEVEL_THREE:
+					GameStateManager.set_game_state("win")
+				TransitionManager.start_transition(next_scene_path)
 
 func _on_body_exited(body: Node2D) -> void:
 	if body is Player:
@@ -88,7 +91,7 @@ func get_next_scene_path() -> String:
 		PortalType.LEVEL_TWO:
 			return "res://scenes/levels/level_three.tscn"
 		PortalType.LEVEL_THREE:
-			return "res://scenes/levels/title_screen.tscn"
+			return "res://scenes/utilities/title_screen.tscn"
 	return "res://scenes/levels/level_two.tscn"
 
 func _change_scene() -> void:

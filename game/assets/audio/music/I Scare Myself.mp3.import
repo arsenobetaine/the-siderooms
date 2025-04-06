@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ddeciabywvoxc"
+path="res://.godot/imported/I Scare Myself.mp3-32177b3b142a724b6597d41e86c031cc.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/music/I Scare Myself.mp3"
+dest_files=["res://.godot/imported/I Scare Myself.mp3-32177b3b142a724b6597d41e86c031cc.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

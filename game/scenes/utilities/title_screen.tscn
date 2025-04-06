@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://3ksm7d0pb7w7"]
+[gd_scene load_steps=19 format=4 uid="uid://3ksm7d0pb7w7"]
 
 [ext_resource type="Script" uid="uid://6p1ql1rv6dlc" path="res://scripts/utilities/title_screen.gd" id="1_d7vvv"]
 [ext_resource type="PackedScene" uid="uid://bdem6pkqjpo87" path="res://scenes/utilities/key_bindings.tscn" id="2_nd2c7"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://ckg76mq128fgd" path="res://scenes/entities/player/player.tscn" id="4_pfkfe"]
 [ext_resource type="Texture2D" uid="uid://brspnxpiedrg4" path="res://assets/graphics/ui/backgrounds/title_screen.png" id="5_gemfs"]
 [ext_resource type="Texture2D" uid="uid://dtpts1yn22bv2" path="res://assets/graphics/ui/buttons/play.png" id="6_jgewu"]
+[ext_resource type="Texture2D" uid="uid://cxan3uyk57ble" path="res://assets/graphics/ui/backgrounds/win.png" id="6_nd2c7"]
+[ext_resource type="Texture2D" uid="uid://lbe12mf6c5d8" path="res://assets/graphics/ui/backgrounds/lose.png" id="7_7rifs"]
 [ext_resource type="Texture2D" uid="uid://c57bd3vsap4uw" path="res://assets/graphics/ui/buttons/play_hovered.png" id="7_mcgve"]
 [ext_resource type="Texture2D" uid="uid://h3xk0kdxrunf" path="res://assets/graphics/ui/buttons/website.png" id="8_ahfes"]
 [ext_resource type="Texture2D" uid="uid://ucswo5s818gm" path="res://assets/graphics/ui/buttons/website_hovered.png" id="9_q3v7w"]
@@ -16,6 +18,12 @@
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jyisb"]
 texture = ExtResource("5_gemfs")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7rifs"]
+texture = ExtResource("6_nd2c7")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pfkfe"]
+texture = ExtResource("7_7rifs")
 
 [node name="TitleScreen" type="Control"]
 layout_mode = 3
@@ -49,6 +57,24 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_jyisb")
 metadata/_edit_use_anchors_ = true
+
+[node name="Win" type="Panel" parent="CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_7rifs")
+
+[node name="Lose" type="Panel" parent="CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_pfkfe")
 
 [node name="ButtonPlay" type="TextureButton" parent="CanvasLayer"]
 anchors_preset = 8

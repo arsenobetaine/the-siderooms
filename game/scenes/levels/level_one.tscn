@@ -30,6 +30,7 @@ y_sort_enabled = true
 [node name="EnemyOne" parent="Entities" instance=ExtResource("6_47t11")]
 position = Vector2(-924, 89)
 scale = Vector2(2, 2)
+enemy_type = 1
 
 [node name="EnemyOne2" parent="Entities" instance=ExtResource("6_47t11")]
 position = Vector2(-924, -79)
@@ -38,6 +39,7 @@ scale = Vector2(2, 2)
 [node name="EnemyOne3" parent="Entities" instance=ExtResource("6_47t11")]
 position = Vector2(-1888, 1)
 scale = Vector2(4, 4)
+enemy_type = 2
 
 [node name="EnemyOne4" parent="Entities" instance=ExtResource("6_47t11")]
 position = Vector2(-1392, -172)
@@ -89,6 +91,7 @@ scale = Vector2(2, 2)
 [node name="EnemyOne17" parent="Entities" instance=ExtResource("6_47t11")]
 position = Vector2(902, 125)
 scale = Vector2(2, 2)
+enemy_type = 2
 
 [node name="EnemyOne18" parent="Entities" instance=ExtResource("6_47t11")]
 position = Vector2(1152, 125)

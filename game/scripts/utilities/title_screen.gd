@@ -7,6 +7,9 @@ extends Control
 @onready var website_button = $CanvasLayer/ButtonWebsite
 @onready var animation_player: AnimationPlayer = $Background/Player/AnimatedSprite/AnimationPlayer
 @onready var point_light: PointLight2D = $Background/Player/PointLight
+@onready var title_panel: Panel = $CanvasLayer/Title
+@onready var win_panel: Panel = $CanvasLayer/Win
+@onready var lose_panel: Panel = $CanvasLayer/Lose
 
 @export var audio_on_texture: Texture2D = preload("res://assets/graphics/ui/buttons/audio.png")
 @export var audio_off_texture: Texture2D = preload("res://assets/graphics/ui/buttons/audio_disabled.png")
@@ -28,6 +31,13 @@ var hover_color: Color = Color(0.8, 0.8, 0.8, 1.0)
 var normal_color: Color = Color(1.0, 1.0, 1.0, 1.0)
 
 func _ready() -> void:
+	if title_panel:
+		title_panel.visible = false
+	if win_panel:
+		win_panel.visible = false
+	if lose_panel:
+		lose_panel.visible = false
+
 	if not (play_button and audio_button and fullscreen_button and website_button):
 		return
 	
@@ -60,19 +70,29 @@ func _ready() -> void:
 		point_light.energy = current_energy
 		_set_next_flicker_interval()
 
+	update_panel_visibility()
+
 func _process(delta: float) -> void:
 	_update_animation()
 	_update_light(delta)
 
 func _handle_play() -> void:
 	var was_muted = AudioServer.is_bus_mute(AudioServer.get_bus_index("Master"))
-	var was_playing = AudioManager.playing
-	var playback_position = AudioManager.get_playback_position()
+	var was_playing = false
+	var playback_position = 0.0
+	
+	# Safety check for AudioManager and audio_player
+	if AudioManager and AudioManager.has_node("AudioStreamPlayer") and AudioManager.audio_player:
+		was_playing = AudioManager.audio_player.playing
+		playback_position = AudioManager.audio_player.get_playback_position()
+	
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	TransitionManager.start_transition("res://scenes/utilities/falling_scene.tscn")
 	AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), was_muted)
-	if was_playing and not AudioManager.playing:
-		AudioManager.play(playback_position)
+	
+	# Only attempt to play if AudioManager.audio_player is valid
+	if was_playing and AudioManager and AudioManager.has_node("AudioStreamPlayer") and AudioManager.audio_player and not AudioManager.audio_player.playing:
+		AudioManager.audio_player.play(playback_position)
 
 func _handle_audio() -> void:
 	AudioManager.toggle_mute()
@@ -146,3 +166,20 @@ func _exit_tree() -> void:
 		fullscreen_button.pressed.disconnect(_handle_fullscreen)
 	if website_button and website_button.pressed.is_connected(_handle_website):
 		website_button.pressed.disconnect(_handle_website)
+
+func update_panel_visibility() -> void:
+	if title_panel and win_panel and lose_panel:
+		var state = GameStateManager.get_game_state()
+		if state == "win":
+			title_panel.visible = false
+			win_panel.visible = true
+			lose_panel.visible = false
+		elif state == "lose":
+			title_panel.visible = false
+			win_panel.visible = false
+			lose_panel.visible = true
+		else:
+			title_panel.visible = true
+			win_panel.visible = false
+			lose_panel.visible = false
+		GameStateManager.clear_game_state()

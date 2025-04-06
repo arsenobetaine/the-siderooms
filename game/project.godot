@@ -23,6 +23,7 @@ config/windows_native_icon="res://assets/icons/icon.ico"
 
 TransitionManager="*res://scenes/utilities/fade_transition.tscn"
 AudioManager="*res://scenes/utilities/audio_manager.tscn"
+GameStateManager="*res://scripts/utilities/game_state_manager.gd"
 
 [display]
 

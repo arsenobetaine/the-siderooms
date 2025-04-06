@@ -1,8 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwtrqlatekdyh"]
+[gd_scene load_steps=4 format=3 uid="uid://bwtrqlatekdyh"]
 
 [ext_resource type="AudioStream" uid="uid://ditslmliu54o0" path="res://assets/audio/music/background.mp3" id="1_imw6h"]
 [ext_resource type="Script" uid="uid://d1dwg3kdcxr23" path="res://scripts/utilities/audio_manager.gd" id="2_1ioei"]
+[ext_resource type="AudioStream" uid="uid://ddeciabywvoxc" path="res://assets/audio/music/I Scare Myself.mp3" id="3_1ioei"]
 
-[node name="AudioManager" type="AudioStreamPlayer"]
-stream = ExtResource("1_imw6h")
+[node name="AudioManager" type="Node"]
 script = ExtResource("2_1ioei")
+normal_music = ExtResource("1_imw6h")
+chase_music = ExtResource("3_1ioei")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

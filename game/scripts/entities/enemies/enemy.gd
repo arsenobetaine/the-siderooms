@@ -28,9 +28,10 @@ enum AnimationState { IDLE, WALKING }
 var last_direction: Vector2 = Vector2.DOWN
 var current_animation_state: AnimationState = AnimationState.IDLE
 
-const TITLE_SCREEN_PATH: String = "res://scenes/title_screen.tscn"
+const TITLE_SCREEN_PATH: String = "res://scenes/utilities/title_screen.tscn"
 
 func _ready() -> void:
+	add_to_group("enemies")
 	await get_tree().physics_frame
 	
 	if not player:
@@ -49,7 +50,7 @@ func _ready() -> void:
 	wait_timer.one_shot = true
 	wait_timer.timeout.connect(_on_wait_timeout)
 	_set_random_target()
-	animation_player.play("idle_down")
+	animation_player.play("one_idle_down")
 
 func _physics_process(_delta: float) -> void:
 	if not player:
@@ -57,7 +58,18 @@ func _physics_process(_delta: float) -> void:
 	
 	var to_player = player.global_position - global_position
 	var distance_to_player = to_player.length()
-	var effective_detection_range = detection_range if player.point_light.visible else detection_range * 0.5
+	
+	# Base scale is 2.0, so calculate the scale factor relative to that
+	var base_scale: float = 2.0
+	var scale_factor: float = scale.x / base_scale  # Assuming uniform scaling (scale.x == scale.y)
+	
+	# Adjust detection range based on scale factor
+	var adjusted_detection_range: float = detection_range * scale_factor
+	var effective_detection_range: float = adjusted_detection_range if player.point_light.visible else adjusted_detection_range * 0.5
+	
+	# Increase detection range by 1.5x when player is sprinting (from previous change)
+	if player.is_sprinting:
+		effective_detection_range *= 1.5
 	
 	if enemy_type == EnemyType.ENEMY_ONE:
 		var ruby_count = player.inventory.get("rubies", 0) if player.inventory else 0
@@ -156,6 +168,7 @@ func _on_body_entered(body: Node) -> void:
 				TransitionManager.start_transition(current_scene_path)
 		EnemyType.ENEMY_THREE:
 			if ResourceLoader.exists(TITLE_SCREEN_PATH):
+				GameStateManager.set_game_state("lose")
 				TransitionManager.start_transition(TITLE_SCREEN_PATH)
 
 func _on_area_entered(area: Area2D) -> void:
@@ -180,7 +193,12 @@ func _get_nearest_ruby() -> Node:
 	var rubies = get_tree().get_nodes_in_group("rubies")
 	var nearest_ruby: Node = null
 	var min_distance: float = INF
-	var effective_detection_range = detection_range if player.point_light.visible else detection_range * 0.5
+	
+	# Adjust detection range based on scale
+	var base_scale: float = 2.0
+	var scale_factor: float = scale.x / base_scale
+	var adjusted_detection_range: float = detection_range * scale_factor
+	var effective_detection_range: float = adjusted_detection_range if player.point_light.visible else adjusted_detection_range * 0.5
 	
 	for ruby in rubies:
 		if not is_instance_valid(ruby):
@@ -216,6 +234,16 @@ func _update_animation() -> void:
 		direction_string = "up"
 	
 	var state_string: String = "idle" if current_animation_state == AnimationState.IDLE else "walk"
-	var animation_name: String = state_string + "_" + direction_string
+	
+	var type_prefix: String = "one_"
+	match enemy_type:
+		EnemyType.ENEMY_ONE:
+			type_prefix = "one_"
+		EnemyType.ENEMY_TWO:
+			type_prefix = "two_"
+		EnemyType.ENEMY_THREE:
+			type_prefix = "three_"
+	
+	var animation_name: String = type_prefix + state_string + "_" + direction_string
 	if animation_player.current_animation != animation_name:
 		animation_player.play(animation_name)
